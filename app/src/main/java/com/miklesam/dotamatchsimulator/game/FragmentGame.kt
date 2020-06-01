@@ -1,6 +1,7 @@
 package com.miklesam.dotamatchsimulator.game
 
 import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,25 +22,26 @@ import kotlinx.android.synthetic.main.fragment_game.*
 
 class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     LineningDialog.NoticeDialogListener, EndMatchDialog.toLobbyInterface {
-    var mListener: backToLobby = myListener
-    val radiantImages =
+    private var mListener: backToLobby = myListener
+    private val radiantImages =
         arrayOfNulls<ImageView>(5)
-    val radiantHeroName =
+    private val radiantHeroName =
         arrayOfNulls<TextView>(5)
-    val radiantPlayerName =
+    private val radiantPlayerName =
         arrayOfNulls<TextView>(5)
 
-    val direImages =
+    private val direImages =
         arrayOfNulls<ImageView>(5)
-    val direHeroName =
+    private val direHeroName =
         arrayOfNulls<TextView>(5)
-    var timer:CountDownTimer?=null
+    private var timer: CountDownTimer? = null
+    var player: MediaPlayer? = null
 
     interface backToLobby {
         fun backToLobbyCLicked()
     }
 
-    var gameEnd = false
+    private var gameEnd = false
     override fun onDialogPositiveClick(position: Array<Int>) {
         gameGame?.CalcilateSpeed(
             arrayOf(
@@ -49,69 +51,38 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
                 position[3],
                 position[4],
                 3,
-                5,
-                5,
-                4,
-                3
-            )
-        )
-        gameViewModel.calculateLineAssign(
-            arrayOf(
-                position[0],
-                position[1],
-                position[2],
-                position[3],
-                position[4],
                 3,
-                5,
-                5,
-                4,
+                3,
+                3,
                 3
             )
         )
-        timer = object : CountDownTimer(15000, 100) {
+        timer = object : CountDownTimer(2300, 100) {
             override fun onTick(millisUntilFinished: Long) {
             }
 
             override fun onFinish() {
-                nextStage()
+                player?.start()
+                gameViewModel.calculateLineAssign(
+                    arrayOf(
+                        position[0],
+                        position[1],
+                        position[2],
+                        position[3],
+                        position[4],
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                    )
+                )
             }
         }
         timer?.start()
 
 
-    }
 
-    override fun onDialogDismissClick(position: Array<Int>) {
-        Log.w("Dialog", "dismiss")
-        gameGame?.CalcilateSpeed(
-            arrayOf(
-                position[0],
-                position[1],
-                position[2],
-                position[3],
-                position[4],
-                3,
-                5,
-                5,
-                4,
-                3
-            )
-        )
-        gameViewModel.calculateLineAssign(
-            arrayOf(
-                position[0],
-                position[1],
-                position[2],
-                position[3],
-                position[4],
-                3,
-                5,
-                5,
-                4,
-                3
-            )
-        )
         timer = object : CountDownTimer(8000, 100) {
             override fun onTick(millisUntilFinished: Long) {
             }
@@ -121,6 +92,7 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             }
         }
         timer?.start()
+
 
     }
 
@@ -132,14 +104,17 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     val TAG = "FragmentGame"
     var heroes: ArrayList<Int>? = null
     var direHeroes: ArrayList<Int>? = null
+    var firstInit = true
     private val gameViewModel: GameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            heroes = requireArguments().getIntegerArrayList(("radiant"))
-            direHeroes = requireArguments().getIntegerArrayList(("dire"))
+            //heroes = requireArguments().getIntegerArrayList(("radiant"))
+            //direHeroes = requireArguments().getIntegerArrayList(("dire"))
         }
+        heroes = arrayListOf(0, 1, 2, 3, 4)
+        direHeroes = arrayListOf(5, 6, 7, 8, 9)
 
         Log.w(TAG, "onCreate")
         val audioAtributes = AudioAttributes.Builder()
@@ -148,16 +123,20 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             .build()
 
         soundPull = SoundPool.Builder()
-            .setMaxStreams(6)
+            .setMaxStreams(1)
             .setAudioAttributes(audioAtributes)
             .build()
-        //soundOne = soundPull.load(context, R.raw.hello_casper, 1)
-        //soundTwo = soundPull.load(context, R.raw.hello_v1lat, 1)
+        soundOne = soundPull.load(context, R.raw.prepare_for_battle, 1)
+        soundTwo = soundPull.load(context, R.raw.the_battle_beggins, 1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.w(TAG, "onViewCreated")
+        player = MediaPlayer.create(context, R.raw.battle_10_sec)
+        //player?.setOnCompletionListener { player?.start() }
+        player?.start()
+        player?.pause()
         radiantImages[0] = firstRadiantPlayerHeroImage
         radiantImages[1] = secondRadiantPlayerHeroImage
         radiantImages[2] = thirdRadiantPlayerHeroImage
@@ -212,16 +191,8 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             }
 
             override fun onFinish() {
-                soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
-                val timer = object : CountDownTimer(1500, 100) {
-                    override fun onTick(millisUntilFinished: Long) {}
-
-                    override fun onFinish() {
-                        soundPull.play(soundTwo, 1F, 1F, 0, 0, 1F)
-                        CreateDeskDialog()
-                    }
-                }
-                timer.start()
+                //soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
+                CreateDeskDialog()
             }
         }
         timerAssignLine.start()
@@ -250,14 +221,21 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             Log.w("Fragment Game", "Current TowerState= $it")
             gameGame?.setTowers(it)
             gameEnd = !it[9] || !it[19]
-            if (!it[9]) {
+            if (!it[9] && !it[19]) {
+                initiateEnd(3)
+            } else if (!it[9]) {
                 initiateEnd(2)
-            } else {
-                if (!it[19]) initiateEnd(1)
+            } else if ((!it[19])) {
+                initiateEnd(1)
             }
 
         })
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        player?.pause()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -267,6 +245,8 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     }
 
     private fun CreateDeskDialog() {
+        soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
+        player?.pause()
         val dialog =
             LineningDialog(this, heroes)
         fragmentManager?.let { dialog.show(it, "CreateDeskDialog") }
@@ -278,9 +258,17 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
         Log.w(TAG, "onStart")
     }
 
+    override fun onStop() {
+        super.onStop()
+        player?.stop()
+        player?.release()
+        player = null
+    }
+
     override fun onDestroyView() {
         gameGame = null
-        timer=null
+        timer = null
+        player = null
         super.onDestroyView()
     }
 
@@ -298,12 +286,16 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     }
 
     fun initiateEnd(side: Int) {
-        Log.w(TAG, "Initiate End")
-        gameGame?.initiateWin(side)
-        CreateEndMatchDialogDialog(side)
+        if (firstInit) {
+            Log.w("Initiate End", "End")
+            firstInit = false
+            gameGame?.initiateWin(side)
+            CreateEndMatchDialogDialog(side)
+        }
     }
 
     private fun CreateEndMatchDialogDialog(side: Int) {
+        player?.stop()
         val dialog = EndMatchDialog(this, side)
         fragmentManager?.let { dialog.show(it, "CreateEndMatchDialogDialog") }
     }

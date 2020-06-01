@@ -74,7 +74,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
             .build()
 
         soundPull = SoundPool.Builder()
-            .setMaxStreams(6)
+            .setMaxStreams(1)
             .setAudioAttributes(audioAtributes)
             .build()
         soundOne = soundPull!!.load(context, R.raw.your_turn_to_pick, 2)
@@ -88,7 +88,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
         initViews()
         player = MediaPlayer.create(context, R.raw.pick_music)
         player?.setOnCompletionListener { player?.start() }
-        player?.start()
+        //player?.start()
 
         Plan_state.setOnClickListener { endedListener.pickEnded(radiantPicks, direPicks) }
         timer = object : CountDownTimer(60000, 1000) {
@@ -452,7 +452,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
     }
 
     private fun callYourPick() {
-        val timer2 = object : CountDownTimer(800, 100) {
+        val timer2 = object : CountDownTimer(500, 100) {
             override fun onTick(millisUntilFinished: Long) {
 
             }

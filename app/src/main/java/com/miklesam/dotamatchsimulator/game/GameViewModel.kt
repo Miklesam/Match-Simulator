@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 
 import com.miklesam.dotamanager.datamodels.HeroStats
 import com.miklesam.dotamatchsimulator.Side
+import kotlinx.coroutines.*
 import kotlin.collections.ArrayList
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,6 +17,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val allTowers = MutableLiveData<List<Boolean>>()
     fun getPlayersMatchStatistic(): LiveData<List<String>> = allPlayersStats
     fun getradiantTowers(): LiveData<List<Boolean>> = allTowers
+    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
 
     val RadiantTeam = arrayListOf<HeroStats>(
@@ -85,81 +87,75 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
 
         }
-        val timer = object : CountDownTimer(3000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                //calculateLineKills(arrayMidRaddiant,arrayMidDire)
-            }
 
-            var radiantTop = 0
-            var radiantMid = 0
-            var radiantBottom = 0
+        var radiantTop = 0
+        var radiantMid = 0
+        var radiantBottom = 0
 
-            var direTop = 0
-            var direMid = 0
-            var direBottom = 0
-
-
-            override fun onFinish() {
-                val timer = object : CountDownTimer(4000, 1000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        if (calculateLineKills(arrayMidRaddiant, arrayMidDire)) {
-                            radiantMid++
-                        } else {
-                            direMid++
-                        }
-                        if (calculateLineKills(arrayTopRaddiant, arrayTopDire)) {
-                            radiantTop++
-                        } else {
-                            direTop++
-                        }
-                        if (calculateLineKills(arrayBottomRaddiant, arrayBottomDire)) {
-                            radiantBottom++
-                        } else {
-                            direBottom++
-                        }
-                    }
-
-                    override fun onFinish() {
-                        calculateLineTower(
-                            radiantMid,
-                            direMid,
-                            radiantTowers.mid,
-                            direTowers.mid,
-                            radiantTowers,
-                            direTowers
-                        )
-                        calculateLineTower(
-                            radiantTop,
-                            direTop,
-                            radiantTowers.top,
-                            direTowers.top,
-                            radiantTowers,
-                            direTowers
-                        )
-                        calculateLineTower(
-                            radiantBottom,
-                            direBottom,
-                            radiantTowers.bot,
-                            direTowers.bot,
-                            radiantTowers,
-                            direTowers
-                        )
-                    }
-                }
-                timer.start()
-            }
+        var direTop = 0
+        var direMid = 0
+        var direBottom = 0
+        scope.launch {
+            delay(3000)
         }
-        timer.start()
 
-
+        scope.launch {
+            for (i in 0 until 3) {
+                delay(1000)
+                val midLane=calculateLineKills(arrayMidRaddiant, arrayMidDire)
+                if (midLane==2) {
+                    radiantMid++
+                } else if(midLane==1) {
+                    direMid++
+                }
+                val topLane=calculateLineKills(arrayTopRaddiant, arrayTopDire)
+                if (topLane==2) {
+                    radiantTop++
+                } else if(topLane==1){
+                    direTop++
+                }
+                val bottomLane=calculateLineKills(arrayBottomRaddiant, arrayBottomDire)
+                if (bottomLane==2) {
+                    radiantBottom++
+                } else if(bottomLane==1){
+                    direBottom++
+                }
+                //sendStats()
+            }
+            calculateLineTower(
+                radiantMid,
+                direMid,
+                radiantTowers.mid,
+                direTowers.mid,
+                radiantTowers,
+                direTowers
+            )
+            calculateLineTower(
+                radiantTop,
+                direTop,
+                radiantTowers.top,
+                direTowers.top,
+                radiantTowers,
+                direTowers
+            )
+            calculateLineTower(
+                radiantBottom,
+                direBottom,
+                radiantTowers.bot,
+                direTowers.bot,
+                radiantTowers,
+                direTowers
+            )
+            val t = calculateTowers()
+        }
     }
 
 
     private fun calculateLineKills(
         radiant: ArrayList<HeroStats>,
         dire: ArrayList<HeroStats>
-    ): Boolean {
-        var returningVal = false
+    ): Int {
+        var returningVal = 0
         if (radiant.isNotEmpty() && dire.isNotEmpty()) {
             val rnds = (0 until (radiant.size + dire.size)).random()
             if (rnds > radiant.size - 1) {
@@ -170,7 +166,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
                 radiant[(0 until radiant.size).random()].death++
-                returningVal = false
+                returningVal = 1
             } else {
                 radiant[rnds].kills++
                 for (i in 0 until radiant.size) {
@@ -179,11 +175,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
                 dire[(0 until dire.size).random()].death++
-                returningVal = true
+                returningVal = 2
             }
+        }else if(radiant.isNotEmpty() && dire.isEmpty()){
+            returningVal=2
+        }else if(radiant.isEmpty() && dire.isNotEmpty()){
+            returningVal=1
         }
         allPlayersStats.postValue(assignStats())
-
         return returningVal
     }
 
@@ -204,7 +203,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 d.updateAncient(false)
             }
 
-        } else {
+        } else if(dire>radiant){
             if (radTowers.isNotEmpty()) {
                 radTowers.removeAt(radTowers.size - 1)
                 r.updateAncient(true)
@@ -213,8 +212,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
 
         }
-        Log.w("Snos =", "radiantTowers $radiantTowers")
-        Log.w("Snos =", "direTowers $direTowers")
         allTowers.postValue(calculateTowers())
     }
 

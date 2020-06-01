@@ -33,12 +33,11 @@ class LineningDialog() : AppCompatDialogFragment() {
 
     interface NoticeDialogListener {
         fun onDialogPositiveClick(position: Array<Int>)
-        fun onDialogDismissClick(position: Array<Int>)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
-        val inflater = activity!!.layoutInflater
+        val inflater = requireActivity().layoutInflater
         val mycustomview = inflater.inflate(R.layout.layout_dialog, null)
         spiner1 = mycustomview.findViewById<Spinner>(R.id.spiner1)
         spiner2 = mycustomview.findViewById<Spinner>(R.id.spiner2)
