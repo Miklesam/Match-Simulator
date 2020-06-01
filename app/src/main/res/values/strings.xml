@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Dota Match Simulator</string>
+
+    <string-array name="lineList">
+        <item>Top</item>
+        <item>Mid</item>
+        <item>Bot</item>
+    </string-array>
+
+    <string-array name="modernlineList">
+        <item>Top</item>
+        <item>Mid</item>
+        <item>Bot</item>
+        <item>Forest</item>
+        <item>Triangle</item>
+        <item>Enemy Forest</item>
+        <item>Enemy Triangle</item>
+        <item>Rosh</item>
+    </string-array>
+
+</resources>

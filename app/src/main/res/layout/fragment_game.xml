@@ -1,0 +1,570 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3f3f3f"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firsthorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstvertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondvertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centralvertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.miklesam.dotamatchsimulator.GameSimulationView
+        android:id="@+id/gameGame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/secondvertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/firstvertical"
+        app:layout_constraintTop_toTopOf="@id/firsthorizontal"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/firsthorizontal"
+        app:layout_constraintEnd_toEndOf="@id/centralvertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/tagImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tagName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:textColor="#f9fcff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tagImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/radiantTotalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="0"
+            android:textColor="#f9fcff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9fcff"
+            app:layout_constraintTop_toBottomOf="@+id/tagImage" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/firsthorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/centralvertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/direTotalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="0"
+            android:textColor="#f9fcff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/tagImage2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tagName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"
+            android:textColor="#f9fcff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tagImage2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9fcff"
+            app:layout_constraintTop_toBottomOf="@+id/tagImage2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/firstvertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/firsthorizontal">
+
+        <ImageView
+            android:id="@+id/firstRadiantPlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/monkey_king_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/firstRadiantPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/firstRadiantPlayerHeroImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/heroRad1"
+            android:text="Monkey King"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/firstRadiantPlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/firstRadiantPlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/radiantStat1"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroRad1" />
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/secondRadiantPlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/zeus_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstRadiantPlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/secondRadiantPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/secondRadiantPlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/secondRadiantPlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/heroRad2"
+            android:text="Zeus"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/secondRadiantPlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/secondRadiantPlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/radiantStat2"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroRad2" />
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/thirdRadiantPlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/abadon_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondRadiantPlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/thirdRadiantPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/thirdRadiantPlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/thirdRadiantPlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/heroRad3"
+            android:text="Abadon"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/thirdRadiantPlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/thirdRadiantPlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/radiantStat3"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroRad3" />
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/forthRadiantPlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/kunnka_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thirdRadiantPlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/forthRadiantPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/forthRadiantPlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/forthRadiantPlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/heroRad4"
+            android:text="Kunnka"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/forthRadiantPlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/forthRadiantPlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/radiantStat4"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroRad4" />
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/fifthRadiantPlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/duzzle_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forthRadiantPlayerHeroImage" />
+
+
+        <TextView
+            android:id="@+id/fifthRadiantPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/fifthRadiantPlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/fifthRadiantPlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="Dazzle"
+            android:id="@+id/heroRad5"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toEndOf="@id/fifthRadiantPlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/fifthRadiantPlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/radiantStat5"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroRad5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/secondvertical"
+        app:layout_constraintTop_toTopOf="@id/firsthorizontal">
+
+        <ImageView
+            android:id="@+id/firstDirePlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/lifestealer_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/firstDirePlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/heroDire1"
+            android:text="Lifestealer"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/firstDirePlayerName" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/direStat1"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroDire1" />
+
+        <ImageView
+            android:id="@+id/secondDirePlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/sand_king_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstDirePlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/secondDirePlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/secondDirePlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/secondDirePlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/heroDire2"
+            android:text="Sand King"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/secondDirePlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/direStat2"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroDire2" />
+
+
+
+        <ImageView
+            android:id="@+id/thirdDirePlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/pudge_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondDirePlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/thirdDirePlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:textSize="10dp"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/thirdDirePlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/thirdDirePlayerHeroImage" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:id="@+id/heroDire3"
+            android:text="Pudge"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/secondDirePlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/thirdDirePlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/direStat3"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroDire3" />
+
+
+
+        <ImageView
+            android:id="@+id/forthDirePlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/slardar_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thirdDirePlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/forthDirePlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:textColor="#f9fcff"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toStartOf="@id/forthDirePlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/forthDirePlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="Slardar"
+            android:id="@+id/heroDire4"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/thirdDirePlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/forthDirePlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/direStat4"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroDire4" />
+
+
+        <ImageView
+            android:id="@+id/fifthDirePlayerHeroImage"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/mars_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forthDirePlayerHeroImage" />
+
+        <TextView
+            android:id="@+id/fifthDirePlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:textColor="#f9fcff"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toStartOf="@id/fifthDirePlayerHeroImage"
+            app:layout_constraintTop_toTopOf="@id/fifthDirePlayerHeroImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="Mars"
+            android:id="@+id/heroDire5"
+            android:textColor="#f9fcff"
+            app:layout_constraintEnd_toStartOf="@id/forthDirePlayerHeroImage"
+            app:layout_constraintTop_toBottomOf="@id/fifthDirePlayerName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:id="@+id/direStat5"
+            android:text="0/0/0"
+            android:textColor="#f9fcff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heroDire5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
