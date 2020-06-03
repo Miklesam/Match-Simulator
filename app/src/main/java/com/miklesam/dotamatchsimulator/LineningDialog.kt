@@ -92,6 +92,11 @@ class LineningDialog() : AppCompatDialogFragment() {
         spiner3.adapter = mad
         spiner4.adapter = mad
         spiner5.adapter = mad
+        spiner1.setSelection(2)
+        spiner2.setSelection(2)
+        spiner3.setSelection(2)
+        spiner4.setSelection(2)
+        spiner5.setSelection(2)
 
         val dialog= builder.create()
         dialog.setCanceledOnTouchOutside(false)

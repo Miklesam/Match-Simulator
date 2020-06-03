@@ -349,21 +349,65 @@ class GameSimulationView : View {
 
             if (i < 5) {
                 if (position[i] == 0) {
-                    if (!DireTowers[8] && RadiantTowers[8]) {
-                        blockY[i] = ((Lanes.values()[6].positionY + 2 * i) * sizeY / 100)
-                        blockX[i] = ((Lanes.values()[6].positionX + 2 * i) * sizeX / 100)
+                    if (!DireTowers[8] && RadiantTowers[8] && DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) {
+                        blockY[i] = ((Lanes.DIRE_TOP_TIER_2.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] = ((Lanes.DIRE_TOP_TIER_2.positionX + 2 * i) * sizeX / 100)
                         reverseX[i] =
-                            (Lanes.values()[6].positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                            (Lanes.DIRE_TOP_TIER_2.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
-                            (Lanes.values()[6].positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                            (Lanes.DIRE_TOP_TIER_2.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
 
-                    } else if (DireTowers[8] && !RadiantTowers[8]) {
-                        blockY[i] = ((Lanes.values()[7].positionY + 2 * i) * sizeY / 100)
-                        blockX[i] = ((Lanes.values()[7].positionX + 2 * i) * sizeX / 100)
+                    } else if (DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) {
+                        blockY[i] = ((Lanes.RADIANT_TOP_TIER_2.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] = ((Lanes.RADIANT_TOP_TIER_2.positionX + 2 * i) * sizeX / 100)
                         reverseX[i] =
-                            (Lanes.values()[7].positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                            (Lanes.RADIANT_TOP_TIER_2.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
-                            (Lanes.values()[7].positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                            (Lanes.RADIANT_TOP_TIER_2.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[8] && RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_TOP_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_TOP_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_TOP_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_TOP_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] = ((Lanes.RADIANT_TOP_TIER_3.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] = ((Lanes.RADIANT_TOP_TIER_3.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_TOP_TIER_3.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_TOP_TIER_3.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[8] && RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && !RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
                     } else {
                         blockY[i] = ((Lanes.values()[position[i]].positionY + 2 * i) * sizeY / 100)
                         blockX[i] = ((Lanes.values()[position[i]].positionX + 2 * i) * sizeX / 100)
@@ -371,6 +415,151 @@ class GameSimulationView : View {
                             (Lanes.values()[position[i]].positionX + 2 * i) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
                             (Lanes.values()[position[i]].positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    }
+                } else if (position[i] == 1) {
+                    if (!DireTowers[0] && RadiantTowers[0] && DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) {
+                        blockY[i] =
+                            ((Lanes.DIRE_MID_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_MID_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_MID_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_MID_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if (DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_MID_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_MID_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_MID_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_MID_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_MID_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_MID_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_MID_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_MID_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[0] && RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_MID_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_MID_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_MID_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_MID_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[0] && RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && !RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else {
+                        blockY[i] = ((Lanes.RADIANT_MID.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] = ((Lanes.RADIANT_MID.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_MID.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_MID.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    }
+
+                } else if (position[i] == 2) {
+                    if (!DireTowers[5] && RadiantTowers[5] && DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3]) {
+                        blockY[i] =
+                            ((Lanes.DIRE_BOT_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_BOT_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_BOT_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_BOT_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if (DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3]) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_BOT_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_BOT_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_BOT_TIER_2_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_BOT_TIER_2_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    }else if ((DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])||
+                        (!DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_BOT_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_BOT_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_BOT_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_BOT_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    }else if ((!DireTowers[5] && RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])) {
+                        blockY[i] =
+                            ((Lanes.DIRE_BOT_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_BOT_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_BOT_TIER_3_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_BOT_TIER_3_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[5] && RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && !RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_RADIANT_SIDE.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
+                    }else {
+                        blockY[i] = ((Lanes.RADIANT_BOT.positionY + 2 * i) * sizeY / 100)
+                        blockX[i] = ((Lanes.RADIANT_BOT.positionX + 2 * i) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_BOT.positionX + 2 * i) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_BOT.positionY + 2 * i) * sizeY / 100 < hero[i].positionY
                     }
                 } else {
                     blockY[i] = ((Lanes.values()[position[i]].positionY + 2 * i) * sizeY / 100)
@@ -383,25 +572,70 @@ class GameSimulationView : View {
             } else {
                 if (position[i] == 3) {
 
-
-                    if (!DireTowers[8] && RadiantTowers[8]) {
+                    if (!DireTowers[8] && RadiantTowers[8] && DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) {
                         blockY[i] =
-                            ((Lanes.values()[6].positionY - (i - 4) * 2) * sizeY / 100)
+                            ((Lanes.DIRE_TOP_TIER_2.positionY - (i - 4) * 2) * sizeY / 100)
                         blockX[i] =
-                            ((Lanes.values()[6].positionX + (9 - i) * 2) * sizeX / 100)
+                            ((Lanes.DIRE_TOP_TIER_2.positionX + (9 - i) * 2) * sizeX / 100)
                         reverseX[i] =
-                            (Lanes.values()[6].positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                            (Lanes.DIRE_TOP_TIER_2.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
-                            (Lanes.values()[6].positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
-                    } else if (DireTowers[8] && !RadiantTowers[8]) {
+                            (Lanes.DIRE_TOP_TIER_2.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if (DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) {
                         blockY[i] =
-                            ((Lanes.values()[7].positionY - (i - 4) * 2) * sizeY / 100)
+                            ((Lanes.RADIANT_TOP_TIER_2.positionY - (i - 4) * 2) * sizeY / 100)
                         blockX[i] =
-                            ((Lanes.values()[7].positionX + (9 - i) * 2) * sizeX / 100)
+                            ((Lanes.RADIANT_TOP_TIER_2.positionX + (9 - i) * 2) * sizeX / 100)
                         reverseX[i] =
-                            (Lanes.values()[7].positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                            (Lanes.RADIANT_TOP_TIER_2.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
-                            (Lanes.values()[7].positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                            (Lanes.RADIANT_TOP_TIER_2.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[8] && RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_TOP_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_TOP_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_TOP_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_TOP_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_TOP_TIER_3.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_TOP_TIER_3.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_TOP_TIER_3.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_TOP_TIER_3.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[8] && RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && !RadiantTowers[7] && !DireTowers[6] && RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6]) ||
+                        (!DireTowers[8] && !RadiantTowers[8] && !DireTowers[7] && !RadiantTowers[7] && DireTowers[6] && !RadiantTowers[6])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
                     } else {
                         blockY[i] =
                             ((Lanes.values()[position[i]].positionY - (i - 4) * 2) * sizeY / 100)
@@ -411,6 +645,155 @@ class GameSimulationView : View {
                             (Lanes.values()[position[i]].positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
                         reverseY[i] =
                             (Lanes.values()[position[i]].positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    }
+                } else if (position[i] == 4) {
+                    if (!DireTowers[0] && RadiantTowers[0] && DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) {
+                        blockY[i] =
+                            ((Lanes.DIRE_MID_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_MID_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_MID_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_MID_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if (DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_MID_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_MID_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_MID_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_MID_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_MID_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_MID_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_MID_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_MID_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[0] && RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_MID_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_MID_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_MID_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_MID_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((!DireTowers[0] && RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && !RadiantTowers[1] && !DireTowers[2] && RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2]) ||
+                        (!DireTowers[0] && !RadiantTowers[0] && !DireTowers[1] && !RadiantTowers[1] && DireTowers[2] && !RadiantTowers[2])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else {
+                        blockY[i] =
+                            ((Lanes.DIRE_MID.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_MID.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_MID.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_MID.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    }
+                } else if (position[i] == 5) {
+
+                    if (!DireTowers[5] && RadiantTowers[5] && DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3]) {
+                        blockY[i] =
+                            ((Lanes.DIRE_BOT_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_BOT_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_BOT_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_BOT_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if (DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3]) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_BOT_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_BOT_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_BOT_TIER_2_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_BOT_TIER_2_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])||
+                        (!DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_BOT_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_BOT_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_BOT_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_BOT_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    }else if ((!DireTowers[5] && RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && DireTowers[3] && RadiantTowers[3])) {
+                        blockY[i] =
+                            ((Lanes.DIRE_BOT_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_BOT_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_BOT_TIER_3_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_BOT_TIER_3_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    }else if ((!DireTowers[5] && RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && !RadiantTowers[4] && !DireTowers[3] && RadiantTowers[3])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else if ((DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3]) ||
+                        (!DireTowers[5] && !RadiantTowers[5] && !DireTowers[4] && !RadiantTowers[4] && DireTowers[3] && !RadiantTowers[3])
+                    ) {
+                        blockY[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.RADIANT_ANCIENT_DIRE_SIDE.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
+                    } else {
+                        blockY[i] =
+                            ((Lanes.DIRE_BOT.positionY - (i - 4) * 2) * sizeY / 100)
+                        blockX[i] =
+                            ((Lanes.DIRE_BOT.positionX + (9 - i) * 2) * sizeX / 100)
+                        reverseX[i] =
+                            (Lanes.DIRE_BOT.positionX + (9 - i) * 2) * sizeX / 100 < hero[i].positionX
+                        reverseY[i] =
+                            (Lanes.DIRE_BOT.positionY - (i - 4) * 2) * sizeY / 100 < hero[i].positionY
                     }
                 } else {
                     blockY[i] =

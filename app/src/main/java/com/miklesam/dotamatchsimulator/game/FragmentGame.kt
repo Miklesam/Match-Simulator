@@ -50,11 +50,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
                 position[2],
                 position[3],
                 position[4],
-                3,
-                3,
-                3,
-                3,
-                3
+                5,
+                5,
+                5,
+                5,
+                5
             )
         )
         timer = object : CountDownTimer(2300, 100) {
@@ -70,11 +70,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
                         position[2],
                         position[3],
                         position[4],
-                        3,
-                        3,
-                        3,
-                        3,
-                        3
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
                     )
                 )
             }
@@ -133,10 +133,10 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.w(TAG, "onViewCreated")
-        player = MediaPlayer.create(context, R.raw.battle_10_sec)
+        //player = MediaPlayer.create(context, R.raw.battle_10_sec)
         //player?.setOnCompletionListener { player?.start() }
-        player?.start()
-        player?.pause()
+        //player?.start()
+        //player?.pause()
         radiantImages[0] = firstRadiantPlayerHeroImage
         radiantImages[1] = secondRadiantPlayerHeroImage
         radiantImages[2] = thirdRadiantPlayerHeroImage
