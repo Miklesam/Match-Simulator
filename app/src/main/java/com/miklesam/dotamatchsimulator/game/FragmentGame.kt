@@ -19,6 +19,7 @@ import com.miklesam.dotamatchsimulator.GameSimulationView
 import com.miklesam.dotamatchsimulator.Heroes
 import com.miklesam.dotamatchsimulator.R
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.coroutines.*
 
 class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     LineningDialog.NoticeDialogListener, EndMatchDialog.toLobbyInterface {
@@ -36,6 +37,7 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
         arrayOfNulls<TextView>(5)
     private var timer: CountDownTimer? = null
     var player: MediaPlayer? = null
+    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     interface backToLobby {
         fun backToLobbyCLicked()
@@ -43,6 +45,15 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
 
     private var gameEnd = false
     override fun onDialogPositiveClick(position: Array<Int>) {
+
+        val laneRandom = arrayOf(
+            (3..5).random(),
+            (3..5).random(),
+            (3..5).random(),
+            (3..5).random(),
+            (3..5).random()
+        )
+
         gameGame?.CalcilateSpeed(
             arrayOf(
                 position[0],
@@ -50,11 +61,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
                 position[2],
                 position[3],
                 position[4],
-                5,
-                5,
-                5,
-                5,
-                5
+                laneRandom[0],
+                laneRandom[1],
+                laneRandom[2],
+                laneRandom[3],
+                laneRandom[4]
             )
         )
         timer = object : CountDownTimer(2300, 100) {
@@ -70,11 +81,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
                         position[2],
                         position[3],
                         position[4],
-                        5,
-                        5,
-                        5,
-                        5,
-                        5
+                        laneRandom[0],
+                        laneRandom[1],
+                        laneRandom[2],
+                        laneRandom[3],
+                        laneRandom[4]
                     )
                 )
             }
@@ -221,13 +232,17 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             Log.w("Fragment Game", "Current TowerState= $it")
             gameGame?.setTowers(it)
             gameEnd = !it[9] || !it[19]
-            if (!it[9] && !it[19]) {
-                initiateEnd(3)
-            } else if (!it[9]) {
-                initiateEnd(2)
-            } else if ((!it[19])) {
-                initiateEnd(1)
+            scope.launch {
+                delay(2000)
+                if (!it[9] && !it[19]) {
+                    initiateEnd(3)
+                } else if (!it[9]) {
+                    initiateEnd(2)
+                } else if ((!it[19])) {
+                    initiateEnd(1)
+                }
             }
+
 
         })
 
@@ -287,7 +302,7 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
 
     fun initiateEnd(side: Int) {
         if (firstInit) {
-            Log.w("Initiate End", "End")
+            Log.w("Initiate End", "End $side")
             firstInit = false
             gameGame?.initiateWin(side)
             CreateEndMatchDialogDialog(side)

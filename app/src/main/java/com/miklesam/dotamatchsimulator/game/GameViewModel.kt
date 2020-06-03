@@ -146,7 +146,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 radiantTowers,
                 direTowers
             )
-            val t = calculateTowers()
+            allTowers.postValue(calculateTowers())
         }
     }
 
@@ -194,11 +194,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         r: Side,
         d: Side
     ) {
-        Log.w("Snos =", "Radiant $radiant  Dire $dire")
         if (radiant > dire) {
             if (diresTower.isNotEmpty()) {
                 diresTower.removeAt(diresTower.size - 1)
-                d.updateAncient(true)
+                if(direTowers.allBuilds[9]){
+                    d.updateAncient(true)
+                }
             } else {
                 d.updateAncient(false)
             }
@@ -206,13 +207,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         } else if(dire>radiant){
             if (radTowers.isNotEmpty()) {
                 radTowers.removeAt(radTowers.size - 1)
-                r.updateAncient(true)
+                if(radiantTowers.allBuilds[9]){
+                    r.updateAncient(true)
+                }
             } else {
                 r.updateAncient(false)
             }
 
         }
-        allTowers.postValue(calculateTowers())
     }
 
     private fun calculateTowers(): List<Boolean> {
