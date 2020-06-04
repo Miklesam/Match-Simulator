@@ -7,7 +7,7 @@ import android.view.WindowManager
 import com.miklesam.dotamatchsimulator.game.FragmentGame
 
 class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.nextFromPick,
-    FragmentGame.backToLobby {
+    FragmentGame.backToLobby, FragmentInfo.InfoListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,14 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
         transaction.commit()
     }
 
+    override fun infoClicked() {
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment = FragmentInfo()
+        transaction.replace(R.id.fragment_holder, fragment)
+            .addToBackStack(null)
+        transaction.commit()
+    }
+
     override fun pickEnded(radiant: ArrayList<Int>, direPicks: ArrayList<Int>) {
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = FragmentGame(this)
@@ -54,6 +62,14 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     override fun backToLobbyCLicked() {
         supportFragmentManager.popBackStack()
         supportFragmentManager.popBackStack()
+    }
+
+    override fun statsClicked() {
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment = FragmentStats()
+        transaction.replace(R.id.fragment_holder, fragment)
+            .addToBackStack(null)
+        transaction.commit()
     }
 
 

@@ -14,11 +14,11 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/game_bttn"
+            android:id="@+id/how_to_play_bttn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_selector"
-            android:text="Game"
+            android:text="How to play"
             android:textColor="#FFF"
             android:textSize="14sp"
             android:layout_marginStart="100dp"
@@ -28,34 +28,20 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/multipleer_bttn"
+            android:id="@+id/stats_bttn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_selector"
-            android:text="Multipleer"
+            android:text="Stats"
             android:textColor="#FFF"
             android:textSize="14sp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            app:layout_constraintTop_toBottomOf="@+id/game_bttn"
+            app:layout_constraintTop_toBottomOf="@+id/how_to_play_bttn"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/info_bttn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_selector"
-            android:text="Info"
-            android:textColor="#FFF"
-            android:textSize="14sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            app:layout_constraintTop_toBottomOf="@+id/multipleer_bttn"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

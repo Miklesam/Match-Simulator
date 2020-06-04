@@ -3,20 +3,20 @@ package com.miklesam.dotamatchsimulator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.fragment_menu.*
 
 
-class FragmentMenu :Fragment(R.layout.fragment_menu){
+class FragmentInfo :Fragment(R.layout.fragment_info){
 
-    interface MenuListener {
-        fun gameClicked()
-        fun infoClicked()
+    interface InfoListener {
+        fun statsClicked()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuListener = activity as MenuListener
-        game_bttn.setOnClickListener { menuListener.gameClicked() }
-        info_bttn.setOnClickListener { menuListener.infoClicked() }
+        val infoListener = activity as InfoListener
+        stats_bttn.setOnClickListener { infoListener.statsClicked() }
+
     }
 }
