@@ -4,10 +4,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.miklesam.dotamatchsimulator.Heroes
 import com.miklesam.dotamatchsimulator.R
+import kotlinx.android.synthetic.main.layout_dialog.*
 
 class LineningDialog() : AppCompatDialogFragment() {
     constructor(myListener: NoticeDialogListener, heroes: ArrayList<Int>?) : this() {
@@ -33,6 +35,7 @@ class LineningDialog() : AppCompatDialogFragment() {
 
     interface NoticeDialogListener {
         fun onDialogPositiveClick(position: Array<Int>)
+        fun onHide()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -49,8 +52,8 @@ class LineningDialog() : AppCompatDialogFragment() {
         //HeroInit()
 
         builder.setView(mycustomview)
-        builder.setTitle("Раставьте героев по линиям ")
-        builder.setPositiveButton("Расставить") { _, _ ->
+        builder.setTitle("Assign heroes along the lines")
+        builder.setPositiveButton("Assign") { _, _ ->
             mListener?.onDialogPositiveClick(
                 arrayOf(
                     spiner1.selectedItemPosition, spiner2.selectedItemPosition,
@@ -61,7 +64,10 @@ class LineningDialog() : AppCompatDialogFragment() {
             Lock = false
 
         }
-
+        builder.setNegativeButton("Hide"){_,_->
+            mListener?.onHide()
+            dismiss()
+        }
         val imaopl = mycustomview.findViewById<ImageView>(R.id.ima1)
         val imaop2 = mycustomview.findViewById<ImageView>(R.id.ima2)
         val imaop3 = mycustomview.findViewById<ImageView>(R.id.ima3)
@@ -100,22 +106,8 @@ class LineningDialog() : AppCompatDialogFragment() {
 
         val dialog= builder.create()
         dialog.setCanceledOnTouchOutside(false)
+
         return dialog
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        if (Lock) {
-            mListener?.onDialogPositiveClick(
-                arrayOf(
-                    spiner1.selectedItemPosition, spiner2.selectedItemPosition,
-                    spiner3.selectedItemPosition, spiner4.selectedItemPosition,
-                    spiner5.selectedItemPosition
-                )
-            )
-
-        }
-
     }
 
 }

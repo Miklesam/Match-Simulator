@@ -566,5 +566,25 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <Button
+        android:id="@+id/commonsHideButton"
+        android:background="@drawable/message_dialog_bttn_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:paddingLeft="46dp"
+        android:paddingRight="46dp"
+        android:textSize="18sp"
+        android:text="Assign"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center_horizontal" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

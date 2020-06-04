@@ -15,9 +15,7 @@ import androidx.lifecycle.Observer
 import com.miklesam.dotamanager.dialogs.EndMatchDialog
 import com.miklesam.dotamanager.dialogs.LineningDialog
 import com.miklesam.dotamanager.ui.game.GameViewModel
-import com.miklesam.dotamatchsimulator.GameSimulationView
-import com.miklesam.dotamatchsimulator.Heroes
-import com.miklesam.dotamatchsimulator.R
+import com.miklesam.dotamatchsimulator.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.*
 
@@ -105,6 +103,10 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
         timer?.start()
 
 
+    }
+
+    override fun onHide() {
+        commonsHideButton.Visible()
     }
 
     var gameGame: GameSimulationView? = null
@@ -203,6 +205,8 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
 
             override fun onFinish() {
                 //soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
+                soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
+                player?.pause()
                 CreateDeskDialog()
             }
         }
@@ -246,6 +250,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
 
         })
 
+        commonsHideButton.setOnClickListener {
+            commonsHideButton.Gone()
+            CreateDeskDialog()
+        }
+
     }
 
     override fun onPause() {
@@ -260,8 +269,6 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
     }
 
     private fun CreateDeskDialog() {
-        soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
-        player?.pause()
         val dialog =
             LineningDialog(this, heroes)
         fragmentManager?.let { dialog.show(it, "CreateDeskDialog") }
@@ -296,6 +303,8 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
         //gameViewModel.setStats(9)
         //soundPull.play(soundTwo, 1F, 1F, 0, 0, 1F)
         if (!gameEnd) {
+            soundPull.play(soundOne, 1F, 1F, 0, 0, 1F)
+            player?.pause()
             CreateDeskDialog()
         }
     }

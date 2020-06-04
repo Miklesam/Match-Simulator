@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.content.ContextCompat
 import com.miklesam.dotamatchsimulator.R
 
 class EndMatchDialog() : AppCompatDialogFragment() {
@@ -25,21 +26,30 @@ class EndMatchDialog() : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
-        val inflater = activity!!.layoutInflater
+        val inflater = requireActivity().layoutInflater
         val mycustomview = inflater.inflate(R.layout.layout_end_match_dialog, null)
         val match_result_text=mycustomview.findViewById<TextView>(R.id.match_result_text)
         when(sude){
-            1->match_result_text.text="Вы выиграли"
-            2->match_result_text.text="Вы проиграли"
-            3->match_result_text.text="Ничья"
+            1->{
+                match_result_text.text="You Win"
+                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.win))
+            }
+            2->{
+                match_result_text.text="You Lose"
+                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.lose))
+            }
+            3->{
+                match_result_text.text="Draw"
+                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.draw))
+            }
         }
 
 
 
 
         builder.setView(mycustomview)
-        builder.setTitle("Матч закончен")
-        builder.setPositiveButton("Закончить") { _, _ ->
+        builder.setTitle("Match is over")
+        builder.setPositiveButton("Quit") { _, _ ->
             mListener?.goToLobbyClick()
             Lock = false
         }
