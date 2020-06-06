@@ -7,4 +7,9 @@
     <color name="win">#008500</color>
     <color name="lose">#A60000</color>
     <color name="draw">#06266F</color>
+
+    <color name="button_end">#006C51</color>
+    <color name="card_back">#60D6A7</color>
+    <color name="white">#fff</color>
+
 </resources>
