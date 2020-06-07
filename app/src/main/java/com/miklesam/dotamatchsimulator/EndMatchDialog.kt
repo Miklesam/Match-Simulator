@@ -13,13 +13,14 @@ import com.miklesam.dotamatchsimulator.R
 class EndMatchDialog() : AppCompatDialogFragment() {
     constructor(myListener: toLobbyInterface, side: Int) : this() {
         mListener = myListener
-        sude=side
+        sude = side
     }
 
 
     var Lock = true
-    var sude=0
+    var sude = 0
     var mListener: toLobbyInterface? = null
+
     interface toLobbyInterface {
         fun goToLobbyClick()
     }
@@ -28,19 +29,34 @@ class EndMatchDialog() : AppCompatDialogFragment() {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
         val mycustomview = inflater.inflate(R.layout.layout_end_match_dialog, null)
-        val match_result_text=mycustomview.findViewById<TextView>(R.id.match_result_text)
-        when(sude){
-            1->{
-                match_result_text.text="You Win"
-                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.win))
+        val match_result_text = mycustomview.findViewById<TextView>(R.id.match_result_text)
+        when (sude) {
+            1 -> {
+                match_result_text.text = "You Win"
+                match_result_text.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.win
+                    )
+                )
             }
-            2->{
-                match_result_text.text="You Lose"
-                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.lose))
+            2 -> {
+                match_result_text.text = "You Lose"
+                match_result_text.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.lose
+                    )
+                )
             }
-            3->{
-                match_result_text.text="Draw"
-                match_result_text.setTextColor(ContextCompat.getColor(requireContext(), R.color.draw))
+            3 -> {
+                match_result_text.text = "Draw"
+                match_result_text.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.draw
+                    )
+                )
             }
         }
 
@@ -54,7 +70,7 @@ class EndMatchDialog() : AppCompatDialogFragment() {
             Lock = false
         }
 
-        val dialog= builder.create()
+        val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)
         return dialog
     }
@@ -64,13 +80,4 @@ class EndMatchDialog() : AppCompatDialogFragment() {
 
 
     }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        if(Lock){
-            mListener?.goToLobbyClick()
-        }
-
-    }
-
 }

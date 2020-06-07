@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     override fun gameClicked() {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentGame(this)
+        val fragment = FragmentGame()
         //val fragment = PickStage()
         transaction.replace(R.id.fragment_holder, fragment)
             .addToBackStack(null)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     override fun pickEnded(radiant: ArrayList<Int>, direPicks: ArrayList<Int>) {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentGame(this)
+        val fragment = FragmentGame()
         val bundle = Bundle()
         bundle.putIntegerArrayList("radiant", radiant)
         bundle.putIntegerArrayList("dire", direPicks)

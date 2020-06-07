@@ -19,9 +19,9 @@ import com.miklesam.dotamatchsimulator.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.*
 
-class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
+class FragmentGame : Fragment(R.layout.fragment_game),
     LineningDialog.NoticeDialogListener, EndMatchDialog.toLobbyInterface {
-    private var mListener: backToLobby = myListener
+    private lateinit var mListener: backToLobby
     private val radiantImages =
         arrayOfNulls<ImageView>(5)
     private val radiantHeroName =
@@ -122,6 +122,7 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mListener= activity as backToLobby
         if (arguments != null) {
             //heroes = requireArguments().getIntegerArrayList(("radiant"))
             //direHeroes = requireArguments().getIntegerArrayList(("dire"))
@@ -314,11 +315,11 @@ class FragmentGame(myListener: backToLobby) : Fragment(R.layout.fragment_game),
             Log.w("Initiate End", "End $side")
             firstInit = false
             gameGame?.initiateWin(side)
-            CreateEndMatchDialogDialog(side)
+            createEndMatchDialogDialog(side)
         }
     }
 
-    private fun CreateEndMatchDialogDialog(side: Int) {
+    private fun createEndMatchDialogDialog(side: Int) {
         player?.stop()
         val dialog = EndMatchDialog(this, side)
         fragmentManager?.let { dialog.show(it, "CreateEndMatchDialogDialog") }

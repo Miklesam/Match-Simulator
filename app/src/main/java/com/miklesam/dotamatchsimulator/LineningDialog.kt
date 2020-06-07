@@ -31,6 +31,7 @@ class LineningDialog() : AppCompatDialogFragment() {
         super.onDestroyView()
         mListener = null
         heroesList = null
+
     }
 
     interface NoticeDialogListener {
@@ -39,6 +40,9 @@ class LineningDialog() : AppCompatDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        if (savedInstanceState!=null){
+            dismiss()
+        }
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
         val mycustomview = inflater.inflate(R.layout.layout_dialog, null)
