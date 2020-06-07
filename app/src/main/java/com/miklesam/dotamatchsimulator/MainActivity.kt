@@ -1,10 +1,13 @@
 package com.miklesam.dotamatchsimulator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import com.miklesam.dotamatchsimulator.game.FragmentGame
+import com.miklesam.dotamatchsimulator.simplefragments.FragmentInfo
+import com.miklesam.dotamatchsimulator.simplefragments.FragmentMenu
+import com.miklesam.dotamatchsimulator.simplefragments.FragmentStats
 
 class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.nextFromPick,
     FragmentGame.backToLobby, FragmentInfo.InfoListener {
@@ -25,7 +28,8 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     private fun showFragmentMain() {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentMenu()
+        val fragment =
+            FragmentMenu()
         transaction.replace(R.id.fragment_holder, fragment)
         transaction.commit()
     }
@@ -39,9 +43,15 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
         transaction.commit()
     }
 
+    override fun multipleerClicked() {
+        val intent = Intent(this, MultipleerActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun infoClicked() {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentInfo()
+        val fragment =
+            FragmentInfo()
         transaction.replace(R.id.fragment_holder, fragment)
             .addToBackStack(null)
         transaction.commit()
@@ -66,7 +76,8 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     override fun statsClicked() {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentStats()
+        val fragment =
+            FragmentStats()
         transaction.replace(R.id.fragment_holder, fragment)
             .addToBackStack(null)
         transaction.commit()

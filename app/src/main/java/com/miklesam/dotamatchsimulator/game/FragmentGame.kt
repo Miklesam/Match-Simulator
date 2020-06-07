@@ -16,6 +16,10 @@ import com.miklesam.dotamanager.dialogs.EndMatchDialog
 import com.miklesam.dotamanager.dialogs.LineningDialog
 import com.miklesam.dotamanager.ui.game.GameViewModel
 import com.miklesam.dotamatchsimulator.*
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
+import com.miklesam.dotamatchsimulator.utils.GameSimulationView
+import com.miklesam.dotamatchsimulator.utils.Gone
+import com.miklesam.dotamatchsimulator.utils.Visible
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.*
 
@@ -28,7 +32,6 @@ class FragmentGame : Fragment(R.layout.fragment_game),
         arrayOfNulls<TextView>(5)
     private val radiantPlayerName =
         arrayOfNulls<TextView>(5)
-
     private val direImages =
         arrayOfNulls<ImageView>(5)
     private val direHeroName =
@@ -292,6 +295,9 @@ class FragmentGame : Fragment(R.layout.fragment_game),
         gameGame = null
         timer = null
         player = null
+        soundPull.stop(soundOne)
+        soundPull.stop(soundTwo)
+        soundPull.release()
         super.onDestroyView()
     }
 

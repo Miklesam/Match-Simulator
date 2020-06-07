@@ -1,4 +1,4 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.adapters
 
 import androidx.recyclerview.widget.RecyclerView
 

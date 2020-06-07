@@ -1,4 +1,4 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.utils
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.miklesam.dotamatchsimulator.R
 
 
 fun Fragment.showCustomToast(message: String, long: Int) {
@@ -51,5 +53,18 @@ fun View.setVisibility(state: Boolean?) {
         false -> View.INVISIBLE
         null -> View.GONE
     }
+}
+
+fun AppCompatActivity.replaceFragmentFromRightToLeft(fragment: Fragment, addToBackStack: Boolean) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.setCustomAnimations(
+        R.anim.enter_right_to_left,
+        R.anim.exit_right_to_left,
+        R.anim.enter_left_to_right,
+        R.anim.exit_left_to_right
+    )
+    transaction.replace(R.id.fragment_holder, fragment)
+    if (addToBackStack) transaction.addToBackStack(null)
+    transaction.commit()
 }
 

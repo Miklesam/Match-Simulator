@@ -1,4 +1,4 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.adapters
 
 import android.view.View
 import android.widget.ImageView

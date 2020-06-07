@@ -1,4 +1,4 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.utils
 
 import android.animation.TimeAnimator
 import android.content.Context
@@ -11,6 +11,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import android.util.Log
 import com.miklesam.dotamanager.datamodels.Hero
+import com.miklesam.dotamatchsimulator.R
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
+import com.miklesam.dotamatchsimulator.datamodels.Lanes
 
 
 class GameSimulationView : View {

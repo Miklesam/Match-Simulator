@@ -1,10 +1,10 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.miklesam.dotamanager.datamodels.Hero
-import kotlinx.android.synthetic.main.hero_item.view.*
+import com.miklesam.dotamatchsimulator.R
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
 
 class HeroesAdapter(val heroListener: OnHeroListener) : RecyclerView.Adapter<HeroHolder>() {
 
@@ -12,7 +12,10 @@ class HeroesAdapter(val heroListener: OnHeroListener) : RecyclerView.Adapter<Her
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.hero_item, parent, false)
-        return HeroHolder(itemView, heroListener)
+        return HeroHolder(
+            itemView,
+            heroListener
+        )
     }
 
     override fun getItemCount(): Int {

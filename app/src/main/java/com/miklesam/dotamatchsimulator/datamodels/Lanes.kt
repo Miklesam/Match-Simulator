@@ -1,4 +1,4 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.datamodels
 
 enum class Lanes (val positionX:Double,val positionY:Double){
     RADIANT_TOP(8.0,16.0),

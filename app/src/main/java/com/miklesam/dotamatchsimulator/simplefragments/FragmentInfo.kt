@@ -1,10 +1,10 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.simplefragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.miklesam.dotamatchsimulator.R
 import kotlinx.android.synthetic.main.fragment_info.*
-import kotlinx.android.synthetic.main.fragment_menu.*
 
 
 class FragmentInfo :Fragment(R.layout.fragment_info){

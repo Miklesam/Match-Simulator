@@ -1,68 +1,44 @@
-package com.miklesam.dotamatchsimulator
+package com.miklesam.dotamatchsimulator.multipleer
 
 import android.media.AudioAttributes
-import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
-import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import com.miklesam.dotamatchsimulator.multipleer.client.ClientViewModel
+import com.miklesam.dotamatchsimulator.multipleer.host.HostViewModel
+import com.miklesam.dotamatchsimulator.R
 import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.utils.showCustomToast
 import kotlinx.android.synthetic.main.pick_stage.*
 
+class MultiPick() : Fragment(R.layout.fragment_multipick) {
+    var host = false
 
-class PickStage : Fragment(R.layout.pick_stage) {
+    constructor(isHost: Boolean) : this() {
+        host = isHost
+    }
+
     var Heros_icon =
         arrayOfNulls<ImageView>(117)
-    var Pick_stage =
+    val Pick_stage =
         arrayOfNulls<ImageView>(22)
-    var arrayHero: MutableList<Heroes>? = null
-    var block = false
-    var pick_state = 0
-    var timer: CountDownTimer? = null
-    val radiantPicks: ArrayList<Int> = ArrayList()
-    val direPicks: ArrayList<Int> = ArrayList()
-    var player: MediaPlayer? = null
+    private lateinit var myViewModel: ViewModel
+    var yourTurn = false
+    var lock = false
+    var heroesArray = arrayOf(23)
     var soundPull: SoundPool? = null
     var soundOne: Int = 0
     var soundTwo: Int = 0
 
-    interface nextFromPick {
-        fun pickEnded(
-            radiant: ArrayList<Int>,
-            direPicks: ArrayList<Int>
-        )
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        arrayHero = null
-        timer = null
-        player = null
-        soundPull = null
-        Heros_icon = emptyArray()
-        Pick_stage = emptyArray()
-    }
-
-    override fun onPause() {
-        Log.w("Pick", " Freagment Pick Pause")
-        super.onPause()
-        player?.pause()
-    }
-
     override fun onStop() {
         super.onStop()
-        Log.w("Pick", "Freagment PickStop")
-        player?.stop()
-        player?.release()
-        player = null
-        timer?.cancel()
-        timer = null
         soundPull?.stop(soundOne)
         soundPull?.stop(soundTwo)
         soundPull = null
@@ -76,79 +52,279 @@ class PickStage : Fragment(R.layout.pick_stage) {
             .build()
 
         soundPull = SoundPool.Builder()
-            .setMaxStreams(1)
+            .setMaxStreams(6)
             .setAudioAttributes(audioAtributes)
             .build()
-        soundOne = soundPull!!.load(context, R.raw.your_turn_to_pick, 2)
+        soundOne = soundPull!!.load(context, R.raw.your_turn_to_pick, 1)
         soundTwo = soundPull!!.load(context, R.raw.your_turn_to_ban, 1)
     }
 
+    interface nextMultiPick {
+        fun radiantPickEnded()
+        fun direPickEnded()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val endedListener = activity as nextFromPick
-        arrayHero = Heroes.values().toMutableList()
-        initViews()
-        player = MediaPlayer.create(context, R.raw.pick_music)
-        player?.setOnCompletionListener { player?.start() }
-        //player?.start()
+        val listener = activity as nextMultiPick
+        if (host) {
+            myViewModel = ViewModelProviders.of(requireActivity()).get(HostViewModel::class.java)
+            (myViewModel as HostViewModel).startPick()
+            (myViewModel as HostViewModel).getTicTac().observe(viewLifecycleOwner, Observer { picksArray ->
+                heroesArray = picksArray
+                if (picksArray[22] == 301) {
+                    val turn = (myViewModel as HostViewModel).getTurnNumber()
+                    if (turn == 0 || turn == 2 || turn == 4 || turn == 6 || turn == 12 || turn == 19) {
+                        soundPull?.play(soundTwo, 1F, 1F, 0, 0, 1F)
+                    } else if(turn<22) {
+                        soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
+                    }
 
-        Plan_state.setOnClickListener { endedListener.pickEnded(radiantPicks, direPicks) }
-        timer = object : CountDownTimer(60000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                timeleft.text = ("" + millisUntilFinished / 1000)
-            }
-
-            override fun onFinish() {
-                if (pick_state != 22) {
-                    block = true
-                    randomPlayerPick()
+                    Help.text = "Ваш Ход"
+                    yourTurn = true
+                } else {
+                    Help.text = "Ход противника"
+                    yourTurn = false
                 }
-            }
-        }
-        timer?.start()
-
-        for (i in 0 until 117) {
-            Heros_icon[i]!!.setOnClickListener {
-                if (!block) {
-                    block = true
-                    if (arrayHero!!.contains(Heroes.values().find { it.id == i })) {
-                        Heros_icon[i]!!.setImageResource(
-                            Heroes.values().find { it.id == i }!!.largeBan
+                for (i in 0 until 8) {
+                    if (picksArray[i] != 300) {
+                        Pick_stage[i]?.setImageResource(
+                            Heroes.values().find { it.id == picksArray[i] }!!.minBan
                         )
-                        val chooseHero = Heroes.values().find { it.id == i }
-                        if (pick_state == 8 || pick_state == 11 || pick_state == 15 || pick_state == 17 || pick_state == 20) {
-                            radiantPicks.add(chooseHero!!.id)
-                            Pick_stage[pick_state]?.setImageResource(chooseHero!!.image_pick)
-                        } else {
-                            Pick_stage[pick_state]?.setImageResource(chooseHero!!.minBan)
-                            block = false
+                    }
+                }
+                if (picksArray[8] != 300) {
+                    Pick_stage[8]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[8] }!!.image_pick
+                    )
+                }
+                if (picksArray[9] != 300) {
+                    Pick_stage[9]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[9] }!!.image_pick
+                    )
+                }
+                if (picksArray[10] != 300) {
+                    Pick_stage[10]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[10] }!!.image_pick
+                    )
+                }
+                if (picksArray[11] != 300) {
+                    Pick_stage[11]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[11] }!!.image_pick
+                    )
+                }
+                if (picksArray[12] != 300) {
+                    Pick_stage[12]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[12] }!!.minBan
+                    )
+                }
+                if (picksArray[13] != 300) {
+                    Pick_stage[13]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[13] }!!.minBan
+                    )
+                }
+                if (picksArray[14] != 300) {
+                    Pick_stage[14]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[14] }!!.image_pick
+                    )
+                }
+                if (picksArray[15] != 300) {
+                    Pick_stage[15]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[15] }!!.image_pick
+                    )
+                }
+                if (picksArray[16] != 300) {
+                    Pick_stage[16]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[16] }!!.image_pick
+                    )
+                }
+                if (picksArray[17] != 300) {
+                    Pick_stage[17]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[17] }!!.image_pick
+                    )
+                }
+                if (picksArray[18] != 300) {
+                    Pick_stage[18]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[18] }!!.minBan
+                    )
+                }
+                if (picksArray[19] != 300) {
+                    Pick_stage[19]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[19] }!!.minBan
+                    )
+                }
+                if (picksArray[20] != 300) {
+                    Pick_stage[20]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[20] }!!.image_pick
+                    )
+                }
+                if (picksArray[21] != 300) {
+                    Pick_stage[21]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[21] }!!.image_pick
+                    )
+                    lock = true
+                    Help.text = "Игра начнется через 5"
+                    val timer = object : CountDownTimer(5000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            val left = (millisUntilFinished / 1000).toInt()
+                            Help.text = "Игра начнется через $left"
                         }
 
-                        arrayHero!!.remove(chooseHero)
-                        pick_state++
-                        if (pick_state != 12 && pick_state != 20) {
-                            randomComputerPick()
-                        } else {
-                            if (pick_state == 0 || pick_state == 2 || pick_state == 4 || pick_state == 6 || pick_state == 12 || pick_state == 19) {
-                                soundPull?.play(soundTwo, 1F, 1F, 0, 0, 1F)
-                            } else if(pick_state<22) {
-                                soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
-                            }
-                            block = false
+                        override fun onFinish() {
+                            listener.radiantPickEnded()
                         }
-                        //timer?.cancel()
+                    }
+                    timer.start()
+                }
+
+                for (i in 0 until 22) {
+                    if (picksArray[i] != 300) {
+                        Heros_icon[picksArray[i]]?.setImageResource(
+                            Heroes.values().find { it.id == picksArray[i] }!!.largeBan
+                        )
+                    }
+                }
+            })
+        } else {
+            myViewModel = ViewModelProviders.of(requireActivity()).get(ClientViewModel::class.java)
+            (myViewModel as ClientViewModel).getTicTac().observe(viewLifecycleOwner, Observer { picksArray ->
+                heroesArray = picksArray
+                if (picksArray[22] == 302) {
+                    val turn = (myViewModel as ClientViewModel).getTurnNumber()
+                    if (turn == 1 || turn == 3 || turn == 5 || turn == 7|| turn == 13 || turn == 18) {
+                        soundPull?.play(soundTwo, 1F, 1F, 0, 0, 1F)
                     } else {
-                        showCustomToast("Забанен", Toast.LENGTH_SHORT)
-                        block = false
+                        soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
+                    }
+                    Help.text = "Ваш Ход"
+                    yourTurn = true
+                } else {
+                    Help.text = "Ход противника"
+                    yourTurn = false
+                }
+
+                for (i in 0 until 8) {
+                    if (picksArray[i] != 300) {
+                        Pick_stage[i]?.setImageResource(
+                            Heroes.values().find { it.id == picksArray[i] }!!.minBan
+                        )
+                    }
+                }
+                if (picksArray[8] != 300) {
+                    Pick_stage[8]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[8] }!!.image_pick
+                    )
+                }
+                if (picksArray[9] != 300) {
+                    Pick_stage[9]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[9] }!!.image_pick
+                    )
+                }
+                if (picksArray[10] != 300) {
+                    Pick_stage[10]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[10] }!!.image_pick
+                    )
+                }
+                if (picksArray[11] != 300) {
+                    Pick_stage[11]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[11] }!!.image_pick
+                    )
+                }
+                if (picksArray[12] != 300) {
+                    Pick_stage[12]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[12] }!!.minBan
+                    )
+                }
+                if (picksArray[13] != 300) {
+                    Pick_stage[13]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[13] }!!.minBan
+                    )
+                }
+                if (picksArray[14] != 300) {
+                    Pick_stage[14]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[14] }!!.image_pick
+                    )
+                }
+                if (picksArray[15] != 300) {
+                    Pick_stage[15]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[15] }!!.image_pick
+                    )
+                }
+                if (picksArray[16] != 300) {
+                    Pick_stage[16]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[16] }!!.image_pick
+                    )
+                }
+                if (picksArray[17] != 300) {
+                    Pick_stage[17]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[17] }!!.image_pick
+                    )
+                }
+                if (picksArray[18] != 300) {
+                    Pick_stage[18]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[18] }!!.minBan
+                    )
+                }
+                if (picksArray[19] != 300) {
+                    Pick_stage[19]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[19] }!!.minBan
+                    )
+                }
+                if (picksArray[20] != 300) {
+                    Pick_stage[20]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[20] }!!.image_pick
+                    )
+                }
+                if (picksArray[21] != 300) {
+                    Pick_stage[21]?.setImageResource(
+                        Heroes.values().find { it.id == picksArray[21] }!!.image_pick
+                    )
+                    lock = true
+                    Help.text = "Игра начнется через 5"
+                    val timer = object : CountDownTimer(5000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            val left = (millisUntilFinished / 1000).toInt()
+                            Help.text = "Игра начнется через $left"
+                        }
+
+                        override fun onFinish() {
+                            listener.direPickEnded()
+                        }
+                    }
+                    timer.start()
+                }
+                for (i in 0 until 22) {
+                    if (picksArray[i] != 300) {
+                        Heros_icon[picksArray[i]]?.setImageResource(
+                            Heroes.values().find { it.id == picksArray[i] }!!.largeBan
+                        )
                     }
                 }
 
+            })
+        }
+        initViews()
+
+        for (i in 0 until 117) {
+            Heros_icon[i]!!.setOnClickListener {
+                if (yourTurn && !lock) {
+                    if (heroesArray.contains(i)) {
+                        showCustomToast("Уже пикнут", Toast.LENGTH_SHORT)
+                    } else {
+                        if (host) {
+                            (myViewModel as HostViewModel).setPoint(i, true)
+                        } else {
+                            (myViewModel as ClientViewModel).setPoint(i)
+                        }
+                    }
+                } else {
+                    showCustomToast("Ход противника", Toast.LENGTH_SHORT)
+                }
 
             }
-
         }
-        Help.text = "Ваша очередь"
-        callYourPick()
+
     }
 
     private fun initViews() {
@@ -452,68 +628,4 @@ class PickStage : Fragment(R.layout.pick_stage) {
         Pick_stage[20] = pick9
         Pick_stage[21] = pick10
     }
-
-    private fun callYourPick() {
-        val timer2 = object : CountDownTimer(500, 100) {
-            override fun onTick(millisUntilFinished: Long) {
-
-            }
-
-            override fun onFinish() {
-                soundPull?.play(soundTwo, 1F, 1F, 0, 0, 1F)
-            }
-        }
-        timer2.start()
-    }
-
-    private fun randomComputerPick() {
-        val rnds = (0 until arrayHero!!.size).random()
-        val what = arrayHero!![rnds]
-        Heros_icon[what.id]?.setImageResource(what!!.largeBan)
-        if (pick_state == 9 || pick_state == 10 || pick_state == 14 || pick_state == 16 || pick_state == 21) {
-            direPicks.add(what.id)
-            Pick_stage[pick_state]?.setImageResource(what!!.image_pick)
-        } else {
-            Pick_stage[pick_state]?.setImageResource(what!!.minBan)
-        }
-        arrayHero!!.remove(what)
-        pick_state++
-        if (pick_state == 10 || pick_state == 14) {
-            randomComputerPick()
-        }
-        if (pick_state == 0 || pick_state == 2 || pick_state == 4 || pick_state == 6 || pick_state == 12 || pick_state == 19) {
-            soundPull?.play(soundTwo, 1F, 1F, 0, 0, 1F)
-        } else if(pick_state<22) {
-            soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
-        }
-
-        timer!!.start()
-        block = false
-        if (pick_state == 22) {
-            timer?.cancel()
-            Plan_state.visibility = VISIBLE
-            block = true
-        }
-    }
-
-    private fun randomPlayerPick() {
-        val rnds = (0 until arrayHero!!.size).random()
-        val what = arrayHero!![rnds]
-        Heros_icon[what.id]?.setImageResource(what!!.largeBan)
-        if (pick_state == 8 || pick_state == 11 || pick_state == 15 || pick_state == 17 || pick_state == 20) {
-            Pick_stage[pick_state]?.setImageResource(what!!.image_pick)
-            radiantPicks.add(what!!.id)
-        } else {
-            Pick_stage[pick_state]?.setImageResource(what!!.minBan)
-        }
-        pick_state++
-        arrayHero!!.remove(what)
-        block = false
-        if (pick_state != 12 && pick_state != 20) {
-            randomComputerPick()
-        } else {
-            timer?.start()
-        }
-    }
-
 }
