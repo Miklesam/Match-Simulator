@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.miklesam.dotamanager.datamodels.HeroStats
 import com.miklesam.dotamanager.multipleer.getInfo
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.datamodels.Side
 import kotlinx.coroutines.*
 
@@ -62,6 +63,10 @@ class HostViewModel : ViewModel(), getInfo {
         HeroStats(0, 0, 0, 5)
     )
 
+    val gameState = MutableLiveData<Int>()
+    fun getTimeState(): LiveData<Int> = gameState
+    var gameCount = 0
+
     init {
         Log.w("View", "ViewModel is Init")
         stateGame.value = 0
@@ -83,7 +88,7 @@ class HostViewModel : ViewModel(), getInfo {
         setLaining()
     }
 
-    fun getTurnNumber():Int{
+    fun getTurnNumber(): Int {
         return turnNumber
     }
 
@@ -188,9 +193,10 @@ class HostViewModel : ViewModel(), getInfo {
             val sb = StringBuilder("Lain:")
             superHero?.forEach { sb.append("$it.") }
             sendMessage(sb.toString())
-            calculateLineAssign(superHero)
-
-
+            scope.launch {
+                delay(2300)
+                calculateLineAssign(superHero)
+            }
         }
     }
 
@@ -230,25 +236,27 @@ class HostViewModel : ViewModel(), getInfo {
         scope.launch {
             for (i in 0 until 3) {
                 delay(1000)
-                val midLane=calculateLineKills(arrayMidRaddiant, arrayMidDire)
-                if (midLane==2) {
+                val midLane = calculateLineKills(arrayMidRaddiant, arrayMidDire)
+                if (midLane == 2) {
                     radiantMid++
-                } else if(midLane==1) {
+                } else if (midLane == 1) {
                     direMid++
                 }
-                val topLane=calculateLineKills(arrayTopRaddiant, arrayTopDire)
-                if (topLane==2) {
+                val topLane = calculateLineKills(arrayTopRaddiant, arrayTopDire)
+                if (topLane == 2) {
                     radiantTop++
-                } else if(topLane==1){
+                } else if (topLane == 1) {
                     direTop++
                 }
-                val bottomLane=calculateLineKills(arrayBottomRaddiant, arrayBottomDire)
-                if (bottomLane==2) {
+                val bottomLane = calculateLineKills(arrayBottomRaddiant, arrayBottomDire)
+                if (bottomLane == 2) {
                     radiantBottom++
-                } else if(bottomLane==1){
+                } else if (bottomLane == 1) {
                     direBottom++
                 }
                 sendStats()
+                gameCount++
+                gameState.postValue(gameCount)
             }
             calculateLineTower(
                 radiantMid,
@@ -282,7 +290,7 @@ class HostViewModel : ViewModel(), getInfo {
             val nextState = stateGame.value?.plus(1)
             radInit = false
             direInit = false
-            delay(10000)
+            delay(3000)
             stateGame.postValue(nextState)
             sendMessage("Next:$nextState")
         }
@@ -313,7 +321,7 @@ class HostViewModel : ViewModel(), getInfo {
                 d.updateAncient(false)
             }
 
-        } else if(dire>radiant){
+        } else if (dire > radiant) {
             if (radTowers.isNotEmpty()) {
                 radTowers.removeAt(radTowers.size - 1)
                 r.updateAncient(true)
@@ -356,6 +364,7 @@ class HostViewModel : ViewModel(), getInfo {
     ): Int {
         var returningVal = 0
         if (radiant.isNotEmpty() && dire.isNotEmpty()) {
+
             val rnds = (0 until (radiant.size + dire.size)).random()
             if (rnds > radiant.size - 1) {
                 dire[(rnds - radiant.size)].kills++
@@ -376,10 +385,10 @@ class HostViewModel : ViewModel(), getInfo {
                 dire[(0 until dire.size).random()].death++
                 returningVal = 2
             }
-        }else if(radiant.isNotEmpty() && dire.isEmpty()){
-            returningVal=2
-        }else if(radiant.isEmpty() && dire.isNotEmpty()){
-            returningVal=1
+        } else if (radiant.isNotEmpty() && dire.isEmpty()) {
+            returningVal = 2
+        } else if (radiant.isEmpty() && dire.isNotEmpty()) {
+            returningVal = 1
         }
         return returningVal
     }

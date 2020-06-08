@@ -26,6 +26,9 @@ class ClientViewModel : ViewModel(), getInfo {
     fun getradiantTowers(): LiveData<List<Boolean>> = allTowers
     var myString = ""
     private var turnNumber = 0
+    val gameState = MutableLiveData<Int>()
+    fun getTimeState(): LiveData<Int> = gameState
+    var gameCount = 0
 
     init {
         stateGame.value = 0
@@ -118,6 +121,8 @@ class ClientViewModel : ViewModel(), getInfo {
             )
             Log.w("StatArray", statArray.toString())
             allPlayersStats.postValue(statArray)
+            gameCount++
+            gameState.postValue(gameCount)
         } else if (mes.substring(0, 4) == "Next") {
             Log.w("ClientModel State", mes)
             val prePayload = mes.split(":")

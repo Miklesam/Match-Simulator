@@ -6,6 +6,44 @@
     android:background="#3f3f3f"
     android:orientation="horizontal">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/firsthorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/sun_time"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dayTime"
+                android:text="0:00"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/firsthorizontal"
         android:layout_width="wrap_content"
@@ -77,11 +115,14 @@
             android:id="@+id/radiantTotalScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
             android:layout_marginEnd="15dp"
             android:text="0"
+            android:textSize="20sp"
             android:textColor="#f9fcff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -107,9 +148,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="200dp"
             android:text="0"
+            android:textSize="20sp"
             android:textColor="#f9fcff"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -164,26 +208,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@id/firstRadiantPlayerHeroImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/heroRad1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/heroRad1"
             android:text="Monkey King"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toEndOf="@id/firstRadiantPlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/firstRadiantPlayerName" />
 
         <TextView
+            android:id="@+id/radiantStat1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/radiantStat1"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -191,10 +235,10 @@
 
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/secondRadiantPlayerHeroImage"
             android:layout_width="40dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/zeus_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/firstRadiantPlayerHeroImage" />
@@ -204,26 +248,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@id/secondRadiantPlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/secondRadiantPlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroRad2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/heroRad2"
             android:text="Zeus"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toEndOf="@id/secondRadiantPlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/secondRadiantPlayerName" />
 
         <TextView
+            android:id="@+id/radiantStat2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/radiantStat2"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -231,10 +275,10 @@
 
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/thirdRadiantPlayerHeroImage"
             android:layout_width="40dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/abadon_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/secondRadiantPlayerHeroImage" />
@@ -244,26 +288,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@id/thirdRadiantPlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/thirdRadiantPlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroRad3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/heroRad3"
             android:text="Abadon"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toEndOf="@id/thirdRadiantPlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/thirdRadiantPlayerName" />
 
         <TextView
+            android:id="@+id/radiantStat3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/radiantStat3"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -271,10 +315,10 @@
 
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/forthRadiantPlayerHeroImage"
             android:layout_width="40dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/kunnka_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thirdRadiantPlayerHeroImage" />
@@ -284,26 +328,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@id/forthRadiantPlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/forthRadiantPlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroRad4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/heroRad4"
             android:text="Kunnka"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toEndOf="@id/forthRadiantPlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/forthRadiantPlayerName" />
 
         <TextView
+            android:id="@+id/radiantStat4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/radiantStat4"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -311,10 +355,10 @@
 
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/fifthRadiantPlayerHeroImage"
             android:layout_width="40dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/duzzle_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/forthRadiantPlayerHeroImage" />
@@ -325,26 +369,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@id/fifthRadiantPlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/fifthRadiantPlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroRad5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="Dazzle"
-            android:id="@+id/heroRad5"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toEndOf="@id/fifthRadiantPlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/fifthRadiantPlayerName" />
 
         <TextView
+            android:id="@+id/radiantStat5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/radiantStat5"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -375,16 +419,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/heroDire1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/heroDire1"
             android:text="Lifestealer"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
@@ -392,10 +436,10 @@
 
 
         <TextView
+            android:id="@+id/direStat1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/direStat1"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toStartOf="parent"
@@ -415,31 +459,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintEnd_toStartOf="@id/secondDirePlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/secondDirePlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroDire2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/heroDire2"
             android:text="Sand King"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toStartOf="@id/firstDirePlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/secondDirePlayerName" />
 
         <TextView
+            android:id="@+id/direStat2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/direStat2"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/heroDire2" />
-
 
 
         <ImageView
@@ -456,32 +499,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:textSize="10dp"
             android:textColor="#f9fcff"
+            android:textSize="10dp"
             app:layout_constraintEnd_toStartOf="@id/thirdDirePlayerHeroImage"
             app:layout_constraintTop_toTopOf="@id/thirdDirePlayerHeroImage" />
 
 
         <TextView
+            android:id="@+id/heroDire3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:id="@+id/heroDire3"
             android:text="Pudge"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toStartOf="@id/secondDirePlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/thirdDirePlayerName" />
 
         <TextView
+            android:id="@+id/direStat3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/direStat3"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/heroDire3" />
-
 
 
         <ImageView
@@ -504,20 +546,20 @@
             app:layout_constraintTop_toTopOf="@id/forthDirePlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroDire4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
             android:text="Slardar"
-            android:id="@+id/heroDire4"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toStartOf="@id/thirdDirePlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/forthDirePlayerName" />
 
         <TextView
+            android:id="@+id/direStat4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/direStat4"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toStartOf="parent"
@@ -544,20 +586,20 @@
             app:layout_constraintTop_toTopOf="@id/fifthDirePlayerHeroImage" />
 
         <TextView
+            android:id="@+id/heroDire5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
             android:text="Mars"
-            android:id="@+id/heroDire5"
             android:textColor="#f9fcff"
             app:layout_constraintEnd_toStartOf="@id/forthDirePlayerHeroImage"
             app:layout_constraintTop_toBottomOf="@id/fifthDirePlayerName" />
 
         <TextView
+            android:id="@+id/direStat5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:id="@+id/direStat5"
             android:text="0/0/0"
             android:textColor="#f9fcff"
             app:layout_constraintStart_toStartOf="parent"
@@ -568,23 +610,22 @@
 
     <Button
         android:id="@+id/commonsHideButton"
-        android:background="@drawable/message_dialog_bttn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:layout_marginEnd="8dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        android:background="@drawable/message_dialog_bttn_bg"
         android:paddingLeft="46dp"
         android:paddingRight="46dp"
-        android:textSize="18sp"
         android:text="Assign"
+        android:textColor="#fff"
+        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center_horizontal" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

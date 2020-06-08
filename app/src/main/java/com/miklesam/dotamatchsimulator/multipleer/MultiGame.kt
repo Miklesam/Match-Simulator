@@ -70,6 +70,12 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
                     CreateDeskDialog()
                 }
             })
+            (myViewModel as HostViewModel).getTimeState().observe(viewLifecycleOwner, Observer {
+
+                val time = "${it * 3}:00"
+                dayTime.text = time
+
+            })
         } else {
             myViewModel = ViewModelProviders.of(requireActivity()).get(ClientViewModel::class.java)
             (myViewModel as ClientViewModel).getTicTac().observe(viewLifecycleOwner, Observer { picksArray ->
@@ -80,6 +86,12 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
                 if (state != 0 && !gameEnd) {
                     CreateDeskDialog()
                 }
+            })
+            (myViewModel as ClientViewModel).getTimeState().observe(viewLifecycleOwner, Observer {
+
+                val time = "${it * 3}:00"
+                dayTime.text = time
+
             })
         }
 

@@ -52,7 +52,7 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
             .build()
 
         soundPull = SoundPool.Builder()
-            .setMaxStreams(6)
+            .setMaxStreams(1)
             .setAudioAttributes(audioAtributes)
             .build()
         soundOne = soundPull!!.load(context, R.raw.your_turn_to_pick, 1)

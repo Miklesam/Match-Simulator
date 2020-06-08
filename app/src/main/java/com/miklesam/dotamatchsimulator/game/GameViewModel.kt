@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 import com.miklesam.dotamanager.datamodels.HeroStats
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.datamodels.Side
 import kotlinx.coroutines.*
 import kotlin.collections.ArrayList
@@ -16,7 +17,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun getPlayersMatchStatistic(): LiveData<List<String>> = allPlayersStats
     fun getradiantTowers(): LiveData<List<Boolean>> = allTowers
     val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-
+    var radiantHeroes = ArrayList<Int>()
+    var direHeroes = ArrayList<Int>()
+    val gameState = MutableLiveData<Int>()
+    fun getTimeState(): LiveData<Int> = gameState
+    var gameCount = 0
 
     val RadiantTeam = arrayListOf<HeroStats>(
         HeroStats(0, 0, 0, 1),
@@ -44,7 +49,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         arrayListOf(true, true, true),
         arrayListOf(true, true, true)
     )
-
 
     private fun assignStats(): List<String> {
         val r1 = "${RadiantTeam[0].kills}/${RadiantTeam[0].death}/${RadiantTeam[0].assist}"
@@ -100,25 +104,27 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         scope.launch {
             for (i in 0 until 3) {
                 delay(1000)
-                val midLane=calculateLineKills(arrayMidRaddiant, arrayMidDire)
-                if (midLane==2) {
+                val midLane = calculateLineKills(arrayMidRaddiant, arrayMidDire)
+                if (midLane == 2) {
                     radiantMid++
-                } else if(midLane==1) {
+                } else if (midLane == 1) {
                     direMid++
                 }
-                val topLane=calculateLineKills(arrayTopRaddiant, arrayTopDire)
-                if (topLane==2) {
+                val topLane = calculateLineKills(arrayTopRaddiant, arrayTopDire)
+                if (topLane == 2) {
                     radiantTop++
-                } else if(topLane==1){
+                } else if (topLane == 1) {
                     direTop++
                 }
-                val bottomLane=calculateLineKills(arrayBottomRaddiant, arrayBottomDire)
-                if (bottomLane==2) {
+                val bottomLane = calculateLineKills(arrayBottomRaddiant, arrayBottomDire)
+                if (bottomLane == 2) {
                     radiantBottom++
-                } else if(bottomLane==1){
+                } else if (bottomLane == 1) {
                     direBottom++
                 }
                 //sendStats()
+                gameCount++
+                gameState.postValue(gameCount)
             }
             calculateLineTower(
                 radiantMid,
@@ -154,6 +160,19 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         dire: ArrayList<HeroStats>
     ): Int {
         var returningVal = 0
+
+        var sumPointsRad = 0
+        for (rad in radiant) {
+            sumPointsRad += Heroes.values().find { it.id == radiantHeroes[rad.seq - 1] }?.laining!!
+        }
+        var sumPointsDire = 0
+        for (direSeq in dire) {
+            sumPointsDire += Heroes.values()
+                .find { it.id == direHeroes[direSeq.seq - 1] }?.laining!!
+        }
+
+
+
         if (radiant.isNotEmpty() && dire.isNotEmpty()) {
             val rnds = (0 until (radiant.size + dire.size)).random()
             if (rnds > radiant.size - 1) {
@@ -175,10 +194,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 dire[(0 until dire.size).random()].death++
                 returningVal = 2
             }
-        }else if(radiant.isNotEmpty() && dire.isEmpty()){
-            returningVal=2
-        }else if(radiant.isEmpty() && dire.isNotEmpty()){
-            returningVal=1
+        } else if (radiant.isNotEmpty() && dire.isEmpty()) {
+            returningVal = 2
+        } else if (radiant.isEmpty() && dire.isNotEmpty()) {
+            returningVal = 1
         }
         allPlayersStats.postValue(assignStats())
         return returningVal
@@ -195,17 +214,17 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (radiant > dire) {
             if (diresTower.isNotEmpty()) {
                 diresTower.removeAt(diresTower.size - 1)
-                if(direTowers.allBuilds[9]){
+                if (direTowers.allBuilds[9]) {
                     d.updateAncient(true)
                 }
             } else {
                 d.updateAncient(false)
             }
 
-        } else if(dire>radiant){
+        } else if (dire > radiant) {
             if (radTowers.isNotEmpty()) {
                 radTowers.removeAt(radTowers.size - 1)
-                if(radiantTowers.allBuilds[9]){
+                if (radiantTowers.allBuilds[9]) {
                     r.updateAncient(true)
                 }
             } else {

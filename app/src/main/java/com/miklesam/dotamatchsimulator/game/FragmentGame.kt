@@ -125,13 +125,16 @@ class FragmentGame : Fragment(R.layout.fragment_game),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mListener= activity as backToLobby
+        mListener = activity as backToLobby
         if (arguments != null) {
             //heroes = requireArguments().getIntegerArrayList(("radiant"))
             //direHeroes = requireArguments().getIntegerArrayList(("dire"))
         }
         heroes = arrayListOf(0, 1, 2, 3, 4)
         direHeroes = arrayListOf(5, 6, 7, 8, 9)
+
+        gameViewModel.radiantHeroes = heroes!!
+        gameViewModel.direHeroes = direHeroes!!
 
         Log.w(TAG, "onCreate")
         val audioAtributes = AudioAttributes.Builder()
@@ -251,6 +254,13 @@ class FragmentGame : Fragment(R.layout.fragment_game),
                 }
             }
 
+
+        })
+
+        gameViewModel.getTimeState().observe(viewLifecycleOwner, Observer {
+
+            val time = "${it * 3}:00"
+            dayTime.text = time
 
         })
 
