@@ -8,6 +8,7 @@ import com.miklesam.dotamanager.datamodels.HeroStats
 import com.miklesam.dotamanager.multipleer.getInfo
 import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.datamodels.Side
+import com.miklesam.dotamatchsimulator.utils.LaneCalculator
 import kotlinx.coroutines.*
 
 
@@ -32,6 +33,8 @@ class HostViewModel : ViewModel(), getInfo {
     private var direLaining = arrayOf(5)
     var radInit = false
     var direInit = false
+    var radiantHeroes = ArrayList<Int>()
+    var direHeroes = ArrayList<Int>()
     private val allPlayersStats = MutableLiveData<List<String>>()
     fun getPlayersMatchStatistic(): LiveData<List<String>> = allPlayersStats
     val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -362,35 +365,10 @@ class HostViewModel : ViewModel(), getInfo {
         radiant: ArrayList<HeroStats>,
         dire: ArrayList<HeroStats>
     ): Int {
-        var returningVal = 0
-        if (radiant.isNotEmpty() && dire.isNotEmpty()) {
-
-            val rnds = (0 until (radiant.size + dire.size)).random()
-            if (rnds > radiant.size - 1) {
-                dire[(rnds - radiant.size)].kills++
-                for (i in 0 until dire.size) {
-                    if (i != rnds - radiant.size) {
-                        dire[i].assist++
-                    }
-                }
-                radiant[(0 until radiant.size).random()].death++
-                returningVal = 1
-            } else {
-                radiant[rnds].kills++
-                for (i in 0 until radiant.size) {
-                    if (i != rnds) {
-                        radiant[i].assist++
-                    }
-                }
-                dire[(0 until dire.size).random()].death++
-                returningVal = 2
-            }
-        } else if (radiant.isNotEmpty() && dire.isEmpty()) {
-            returningVal = 2
-        } else if (radiant.isEmpty() && dire.isNotEmpty()) {
-            returningVal = 1
-        }
-        return returningVal
+        val retVal =
+            LaneCalculator().calculateLineKills(radiant, dire, radiantHeroes, direHeroes, gameCount)
+        allPlayersStats.postValue(assignStats())
+        return retVal
     }
 
     private fun assignStats(): List<String> {

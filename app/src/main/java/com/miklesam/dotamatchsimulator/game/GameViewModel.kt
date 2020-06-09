@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.miklesam.dotamanager.datamodels.HeroStats
 import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.datamodels.Side
+import com.miklesam.dotamatchsimulator.utils.LaneCalculator
 import kotlinx.coroutines.*
 import kotlin.collections.ArrayList
 
@@ -159,48 +160,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         radiant: ArrayList<HeroStats>,
         dire: ArrayList<HeroStats>
     ): Int {
-        var returningVal = 0
-
-        var sumPointsRad = 0
-        for (rad in radiant) {
-            sumPointsRad += Heroes.values().find { it.id == radiantHeroes[rad.seq - 1] }?.laining!!
-        }
-        var sumPointsDire = 0
-        for (direSeq in dire) {
-            sumPointsDire += Heroes.values()
-                .find { it.id == direHeroes[direSeq.seq - 1] }?.laining!!
-        }
-
-
-
-        if (radiant.isNotEmpty() && dire.isNotEmpty()) {
-            val rnds = (0 until (radiant.size + dire.size)).random()
-            if (rnds > radiant.size - 1) {
-                dire[(rnds - radiant.size)].kills++
-                for (i in 0 until dire.size) {
-                    if (i != rnds - radiant.size) {
-                        dire[i].assist++
-                    }
-                }
-                radiant[(0 until radiant.size).random()].death++
-                returningVal = 1
-            } else {
-                radiant[rnds].kills++
-                for (i in 0 until radiant.size) {
-                    if (i != rnds) {
-                        radiant[i].assist++
-                    }
-                }
-                dire[(0 until dire.size).random()].death++
-                returningVal = 2
-            }
-        } else if (radiant.isNotEmpty() && dire.isEmpty()) {
-            returningVal = 2
-        } else if (radiant.isEmpty() && dire.isNotEmpty()) {
-            returningVal = 1
-        }
+        val retVal =
+            LaneCalculator().calculateLineKills(radiant, dire, radiantHeroes, direHeroes, gameCount)
         allPlayersStats.postValue(assignStats())
-        return returningVal
+        return retVal
     }
 
     private fun calculateLineTower(

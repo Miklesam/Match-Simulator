@@ -62,14 +62,33 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
         if (host) {
             myViewModel = ViewModelProviders.of(requireActivity()).get(HostViewModel::class.java)
             //(myViewModel as HostViewModel).startPick()
-            (myViewModel as HostViewModel).getTicTac().observe(viewLifecycleOwner, Observer { picksArray ->
-                showImages(picksArray)
-            })
-            (myViewModel as HostViewModel).getStateGame().observe(viewLifecycleOwner, Observer { state ->
-                if (state != 0 && !gameEnd) {
-                    CreateDeskDialog()
-                }
-            })
+            (myViewModel as HostViewModel).getTicTac()
+                .observe(viewLifecycleOwner, Observer { picksArray ->
+                    showImages(picksArray)
+                    radiant = arrayListOf(
+                        picksArray[8],
+                        picksArray[11],
+                        picksArray[15],
+                        picksArray[17],
+                        picksArray[20]
+                    )
+                    (myViewModel as HostViewModel).radiantHeroes = radiant
+
+                    dire = arrayListOf(
+                        picksArray[9],
+                        picksArray[10],
+                        picksArray[14],
+                        picksArray[16],
+                        picksArray[21]
+                    )
+                    (myViewModel as HostViewModel).direHeroes = dire
+                })
+            (myViewModel as HostViewModel).getStateGame()
+                .observe(viewLifecycleOwner, Observer { state ->
+                    if (state != 0 && !gameEnd) {
+                        CreateDeskDialog()
+                    }
+                })
             (myViewModel as HostViewModel).getTimeState().observe(viewLifecycleOwner, Observer {
 
                 val time = "${it * 3}:00"
@@ -78,15 +97,17 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
             })
         } else {
             myViewModel = ViewModelProviders.of(requireActivity()).get(ClientViewModel::class.java)
-            (myViewModel as ClientViewModel).getTicTac().observe(viewLifecycleOwner, Observer { picksArray ->
-                showImages(picksArray)
-            })
+            (myViewModel as ClientViewModel).getTicTac()
+                .observe(viewLifecycleOwner, Observer { picksArray ->
+                    showImages(picksArray)
+                })
 
-            (myViewModel as ClientViewModel).getStateGame().observe(viewLifecycleOwner, Observer { state ->
-                if (state != 0 && !gameEnd) {
-                    CreateDeskDialog()
-                }
-            })
+            (myViewModel as ClientViewModel).getStateGame()
+                .observe(viewLifecycleOwner, Observer { state ->
+                    if (state != 0 && !gameEnd) {
+                        CreateDeskDialog()
+                    }
+                })
             (myViewModel as ClientViewModel).getTimeState().observe(viewLifecycleOwner, Observer {
 
                 val time = "${it * 3}:00"
@@ -124,24 +145,25 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
                 }
             })
 
-            (myViewModel as HostViewModel).getPlayersMatchStatistic().observe(viewLifecycleOwner, Observer {
-                Log.w("FragmentGame", it.toString())
-                radiantStat1.text = it[0]
-                radiantStat2.text = it[1]
-                radiantStat3.text = it[2]
-                radiantStat4.text = it[3]
-                radiantStat5.text = it[4]
+            (myViewModel as HostViewModel).getPlayersMatchStatistic()
+                .observe(viewLifecycleOwner, Observer {
+                    Log.w("FragmentGame", it.toString())
+                    radiantStat1.text = it[0]
+                    radiantStat2.text = it[1]
+                    radiantStat3.text = it[2]
+                    radiantStat4.text = it[3]
+                    radiantStat5.text = it[4]
 
-                direStat1.text = it[5]
-                direStat2.text = it[6]
-                direStat3.text = it[7]
-                direStat4.text = it[8]
-                direStat5.text = it[9]
+                    direStat1.text = it[5]
+                    direStat2.text = it[6]
+                    direStat3.text = it[7]
+                    direStat4.text = it[8]
+                    direStat5.text = it[9]
 
-                radiantTotalScore.text = it[10]
-                direTotalScore.text = it[11]
+                    radiantTotalScore.text = it[10]
+                    direTotalScore.text = it[11]
 
-            })
+                })
 
             (myViewModel as HostViewModel).getradiantTowers().observe(viewLifecycleOwner, Observer {
                 Log.w("Fragment Game", "Current TowerState= $it")
@@ -165,37 +187,39 @@ class MultiGame(isHost: Boolean) : Fragment(R.layout.fragment_game),
                 }
             })
 
-            (myViewModel as ClientViewModel).getPlayersMatchStatistic().observe(viewLifecycleOwner, Observer {
-                Log.w("FragmentGame", it.toString())
-                radiantStat1.text = it[0]
-                radiantStat2.text = it[1]
-                radiantStat3.text = it[2]
-                radiantStat4.text = it[3]
-                radiantStat5.text = it[4]
+            (myViewModel as ClientViewModel).getPlayersMatchStatistic()
+                .observe(viewLifecycleOwner, Observer {
+                    Log.w("FragmentGame", it.toString())
+                    radiantStat1.text = it[0]
+                    radiantStat2.text = it[1]
+                    radiantStat3.text = it[2]
+                    radiantStat4.text = it[3]
+                    radiantStat5.text = it[4]
 
-                direStat1.text = it[5]
-                direStat2.text = it[6]
-                direStat3.text = it[7]
-                direStat4.text = it[8]
-                direStat5.text = it[9]
+                    direStat1.text = it[5]
+                    direStat2.text = it[6]
+                    direStat3.text = it[7]
+                    direStat4.text = it[8]
+                    direStat5.text = it[9]
 
-                radiantTotalScore.text = it[10]
-                direTotalScore.text = it[11]
+                    radiantTotalScore.text = it[10]
+                    direTotalScore.text = it[11]
 
-            })
+                })
 
-            (myViewModel as ClientViewModel).getradiantTowers().observe(viewLifecycleOwner, Observer {
-                gameGame?.setTowers(it)
-                gameEnd = !it[9] || !it[19]
-                if (!it[9] && !it[19]) {
-                    initiateEnd(3)
-                } else if ((!it[19])) {
-                    initiateEnd(2)
-                } else if (!it[9]) {
-                    initiateEnd(1)
-                }
+            (myViewModel as ClientViewModel).getradiantTowers()
+                .observe(viewLifecycleOwner, Observer {
+                    gameGame?.setTowers(it)
+                    gameEnd = !it[9] || !it[19]
+                    if (!it[9] && !it[19]) {
+                        initiateEnd(3)
+                    } else if ((!it[19])) {
+                        initiateEnd(2)
+                    } else if (!it[9]) {
+                        initiateEnd(1)
+                    }
 
-            })
+                })
         }
 
         commonsHideButton.setOnClickListener {

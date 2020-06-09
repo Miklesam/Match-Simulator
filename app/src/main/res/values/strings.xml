@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">Dota Match Simulator</string>
+    <string name="game">Game</string>
+    <string name="multipleer">Multipleer</string>
+    <string name="menu_info">Info</string>
+    <string name="how_to_play">How to play</string>
+    <string name="hero_statistics">Hero Stats</string>
+    <string name="hero">Hero</string>
+    <string name="late_game">Late Game</string>
+    <string name="fighting">Fighting</string>
+    <string name="lainning">Laining</string>
+    <string name="host">Host</string>
+    <string name="connect_to_host">Connect to host</string>
+    <string name="start_host">Start Host</string>
+    <string name="waiting_for_players">Waiting for Player</string>
+    <string name="enter_ip_address">Enter Ip Address...</string>
 
     <string-array name="lineList">
         <item>Top</item>
