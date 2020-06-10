@@ -127,11 +127,11 @@ class FragmentGame : Fragment(R.layout.fragment_game),
         super.onCreate(savedInstanceState)
         mListener = activity as backToLobby
         if (arguments != null) {
-            //heroes = requireArguments().getIntegerArrayList(("radiant"))
-            //direHeroes = requireArguments().getIntegerArrayList(("dire"))
+            heroes = requireArguments().getIntegerArrayList(("radiant"))
+            direHeroes = requireArguments().getIntegerArrayList(("dire"))
         }
-        heroes = arrayListOf(0, 1, 2, 3, 4)
-        direHeroes = arrayListOf(5, 6, 7, 8, 9)
+        //heroes = arrayListOf(0, 1, 2, 3, 4)
+        //direHeroes = arrayListOf(5, 6, 7, 8, 9)
 
         gameViewModel.radiantHeroes = heroes!!
         gameViewModel.direHeroes = direHeroes!!
@@ -303,6 +303,7 @@ class FragmentGame : Fragment(R.layout.fragment_game),
 
     override fun onDestroyView() {
         gameGame = null
+        timer?.cancel()
         timer = null
         player = null
         soundPull.stop(soundOne)

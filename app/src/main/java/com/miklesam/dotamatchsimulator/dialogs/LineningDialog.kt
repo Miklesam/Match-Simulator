@@ -53,8 +53,8 @@ class LineningDialog() : AppCompatDialogFragment() {
         //HeroInit()
 
         builder.setView(mycustomview)
-        builder.setTitle("Assign heroes along the lines")
-        builder.setPositiveButton("Assign") { _, _ ->
+        builder.setTitle(getString(R.string.assign_heroes_to_lines))
+        builder.setPositiveButton(R.string.assign) { _, _ ->
             mListener?.onDialogPositiveClick(
                 arrayOf(
                     spiner1.selectedItemPosition, spiner2.selectedItemPosition,
@@ -65,7 +65,7 @@ class LineningDialog() : AppCompatDialogFragment() {
             Lock = false
 
         }
-        builder.setNegativeButton("Hide"){_,_->
+        builder.setNegativeButton(R.string.hide){_,_->
             mListener?.onHide()
             dismiss()
         }

@@ -1031,6 +1031,18 @@
                         android:layout_height="70sp"
                         android:layout_marginLeft="5sp" />
 
+                    <ImageView
+                        android:id="@+id/SnapFire"
+                        android:layout_width="45sp"
+                        android:layout_height="70sp"
+                        android:layout_marginLeft="5sp" />
+
+                    <ImageView
+                        android:id="@+id/VoidSpirit"
+                        android:layout_width="45sp"
+                        android:layout_height="70sp"
+                        android:layout_marginLeft="5sp"/>
+
 
                 </LinearLayout>
 

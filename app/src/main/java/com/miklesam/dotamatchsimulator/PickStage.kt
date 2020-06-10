@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.pick_stage.*
 
 class PickStage : Fragment(R.layout.pick_stage) {
     var Heros_icon =
-        arrayOfNulls<ImageView>(117)
+        arrayOfNulls<ImageView>(119)
     var Pick_stage =
         arrayOfNulls<ImageView>(22)
     var arrayHero: MutableList<Heroes>? = null
@@ -107,7 +107,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
         }
         timer?.start()
 
-        for (i in 0 until 117) {
+        for (i in 0 until 119) {
             Heros_icon[i]!!.setOnClickListener {
                 if (!block) {
                     block = true
@@ -138,7 +138,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
                         }
                         //timer?.cancel()
                     } else {
-                        showCustomToast("Забанен", Toast.LENGTH_SHORT)
+                        showCustomToast(getString(R.string.banned), Toast.LENGTH_SHORT)
                         block = false
                     }
                 }
@@ -147,7 +147,7 @@ class PickStage : Fragment(R.layout.pick_stage) {
             }
 
         }
-        Help.text = "Ваша очередь"
+        Help.text = getString(R.string.your_turn)
         callYourPick()
     }
 
@@ -288,6 +288,8 @@ class PickStage : Fragment(R.layout.pick_stage) {
         Heros_icon[114] = WW
         Heros_icon[115] = WichDoctor
         Heros_icon[116] = Zeus
+        Heros_icon[117] = SnapFire
+        Heros_icon[118] = VoidSpirit
 
 
         Heros_icon[0]!!.setImageResource(Heroes.ABADON.icon)
@@ -428,6 +430,8 @@ class PickStage : Fragment(R.layout.pick_stage) {
         Heros_icon[114]!!.setImageResource(Heroes.WYNTER_WYWERN.icon)
         Heros_icon[115]!!.setImageResource(Heroes.WITCH_DOCTOR.icon)
         Heros_icon[116]!!.setImageResource(Heroes.ZEUS.icon)
+        Heros_icon[117]!!.setImageResource(Heroes.SNAPFIRE.icon)
+        Heros_icon[118]!!.setImageResource(Heroes.VOID_SPIRIT.icon)
 
         Pick_stage[0] = ban1
         Pick_stage[1] = ban2

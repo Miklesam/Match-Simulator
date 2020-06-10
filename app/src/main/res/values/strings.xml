@@ -15,6 +15,21 @@
     <string name="waiting_for_players">Waiting for Player</string>
     <string name="enter_ip_address">Enter Ip Address...</string>
 
+    <string name="assign_heroes_to_lines">Assign heroes along the lines</string>
+    <string name="assign">Assign</string>
+    <string name="hide">Hide</string>
+    <string name="match_is_over">Match is over</string>
+    <string name="quit">Quit</string>
+
+    <string name="you_win">You Win</string>
+    <string name="you_lose">You Lose</string>
+    <string name="draw">Draw</string>
+    <string name="you_ip_is">your ip address is %s</string>
+
+    <string name="banned">Banned</string>
+    <string name="your_turn">Your turn</string>
+    <string name="enemy_turn">Enemy\'s turn</string>
+    <string name="game_start_after">Game start after %d</string>
     <string-array name="lineList">
         <item>Top</item>
         <item>Mid</item>

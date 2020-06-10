@@ -709,6 +709,18 @@ enum class Heroes(val id: Int, val heroName: String, val image_pick: Int, val ic
         R.drawable.zeus_icon,
         R.drawable.zeus_large_ban,
         R.drawable.zeus_min_ban,
-        R.drawable.zeus_mipmap,60,95,90);
+        R.drawable.zeus_mipmap,60,95,90),
+    SNAPFIRE(117, "Snapfire",
+        R.drawable.snapfire_picked,
+        R.drawable.snapfire_icon,
+        R.drawable.snapfire_large_ban,
+        R.drawable.snapfire_min_ban,
+        R.drawable.snapfire_minimap_icon,30,35,50),
+    VOID_SPIRIT(118, "Void Spirit",
+        R.drawable.void_spirit_picked,
+        R.drawable.void_spirit_icon,
+        R.drawable.void_spirit_large_ban,
+        R.drawable.void_spirit_min_ban,
+        R.drawable.void_spirit_minimap_icon,50,55,20);
 
 }

@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     override fun gameClicked() {
         val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentGame()
-        //val fragment = PickStage()
+        //val fragment = FragmentGame()
+        val fragment = PickStage()
         transaction.replace(R.id.fragment_holder, fragment)
             .addToBackStack(null)
         transaction.commit()

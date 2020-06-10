@@ -26,7 +26,7 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
     }
 
     var Heros_icon =
-        arrayOfNulls<ImageView>(117)
+        arrayOfNulls<ImageView>(119)
     val Pick_stage =
         arrayOfNulls<ImageView>(22)
     private lateinit var myViewModel: ViewModel
@@ -81,10 +81,10 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
                         soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
                     }
 
-                    Help.text = "Ваш Ход"
+                    Help.text = getString(R.string.your_turn)
                     yourTurn = true
                 } else {
-                    Help.text = "Ход противника"
+                    Help.text = getString(R.string.enemy_turn)
                     yourTurn = false
                 }
                 for (i in 0 until 8) {
@@ -164,11 +164,11 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
                         Heroes.values().find { it.id == picksArray[21] }!!.image_pick
                     )
                     lock = true
-                    Help.text = "Игра начнется через 5"
+                    Help.text = getString(R.string.game_start_after,5)
                     val timer = object : CountDownTimer(5000, 1000) {
                         override fun onTick(millisUntilFinished: Long) {
                             val left = (millisUntilFinished / 1000).toInt()
-                            Help.text = "Игра начнется через $left"
+                            Help.text = getString(R.string.game_start_after,left)
                         }
 
                         override fun onFinish() {
@@ -197,10 +197,10 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
                     } else {
                         soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
                     }
-                    Help.text = "Ваш Ход"
+                    Help.text = getString(R.string.your_turn)
                     yourTurn = true
                 } else {
-                    Help.text = "Ход противника"
+                    Help.text = getString(R.string.enemy_turn)
                     yourTurn = false
                 }
 
@@ -281,11 +281,11 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
                         Heroes.values().find { it.id == picksArray[21] }!!.image_pick
                     )
                     lock = true
-                    Help.text = "Игра начнется через 5"
+                    Help.text = getString(R.string.game_start_after,5)
                     val timer = object : CountDownTimer(5000, 1000) {
                         override fun onTick(millisUntilFinished: Long) {
                             val left = (millisUntilFinished / 1000).toInt()
-                            Help.text = "Игра начнется через $left"
+                            Help.text = getString(R.string.game_start_after,left)
                         }
 
                         override fun onFinish() {
@@ -306,7 +306,7 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
         }
         initViews()
 
-        for (i in 0 until 117) {
+        for (i in 0 until 119) {
             Heros_icon[i]!!.setOnClickListener {
                 if (yourTurn && !lock) {
                     if (heroesArray.contains(i)) {
@@ -319,7 +319,7 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
                         }
                     }
                 } else {
-                    showCustomToast("Ход противника", Toast.LENGTH_SHORT)
+                    showCustomToast(getString(R.string.enemy_turn), Toast.LENGTH_SHORT)
                 }
 
             }
@@ -464,6 +464,9 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
         Heros_icon[114] = WW
         Heros_icon[115] = WichDoctor
         Heros_icon[116] = Zeus
+        Heros_icon[117] = SnapFire
+        Heros_icon[118] = VoidSpirit
+
 
 
         Heros_icon[0]!!.setImageResource(Heroes.ABADON.icon)
@@ -604,6 +607,8 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
         Heros_icon[114]!!.setImageResource(Heroes.WYNTER_WYWERN.icon)
         Heros_icon[115]!!.setImageResource(Heroes.WITCH_DOCTOR.icon)
         Heros_icon[116]!!.setImageResource(Heroes.ZEUS.icon)
+        Heros_icon[117]!!.setImageResource(Heroes.SNAPFIRE.icon)
+        Heros_icon[118]!!.setImageResource(Heroes.VOID_SPIRIT.icon)
 
         Pick_stage[0] = ban1
         Pick_stage[1] = ban2

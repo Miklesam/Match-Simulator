@@ -620,7 +620,7 @@
         android:background="@drawable/message_dialog_bttn_bg"
         android:paddingLeft="46dp"
         android:paddingRight="46dp"
-        android:text="Assign"
+        android:text="@string/assign"
         android:textColor="#fff"
         android:textSize="18sp"
         android:visibility="gone"

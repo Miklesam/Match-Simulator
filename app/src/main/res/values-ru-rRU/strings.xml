@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dota Match Simulator</string>
+    <string name="game">Игра</string>
+    <string name="multipleer">Мультиплеер</string>
+    <string name="menu_info">Инфо</string>
+    <string name="how_to_play">Как играть</string>
+    <string name="hero_statistics">Статистика героев</string>
+    <string name="hero">Герой</string>
+    <string name="late_game">Поздняя игра</string>
+    <string name="fighting">Сражение</string>
+    <string name="lainning">Лэйнинг</string>
+    <string name="host">Хост</string>
+    <string name="connect_to_host">Подключиться к хосту</string>
+    <string name="start_host">Запустить хост</string>
+    <string name="waiting_for_players">Ожидание игрока</string>
+    <string name="enter_ip_address">Введите IP адрес ...</string>
+    <string name="assign_heroes_to_lines">Раставьте героев по линиям</string>
+    <string name="assign">Раставить</string>
+    <string name="hide">Скрыть</string>
+    <string name="match_is_over">Матч закончен</string>
+    <string name="quit">Выйти</string>
+    <string name="you_win">Вы выйграли</string>
+    <string name="you_lose">Вы проиграли</string>
+    <string name="draw">Ничья</string>
+    <string name="you_ip_is">Ваш IP адрес %s</string>
+    <string name="banned">Забанен</string>
+    <string name="your_turn">Ваш ход</string>
+    <string name="enemy_turn">Ход противника</string>
+    <string name="game_start_after">Игра начнется через %d</string>
+</resources>

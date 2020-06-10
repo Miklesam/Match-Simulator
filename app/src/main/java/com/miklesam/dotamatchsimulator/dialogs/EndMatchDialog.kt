@@ -32,7 +32,7 @@ class EndMatchDialog() : AppCompatDialogFragment() {
         val match_result_text = mycustomview.findViewById<TextView>(R.id.match_result_text)
         when (sude) {
             1 -> {
-                match_result_text.text = "You Win"
+                match_result_text.text = getString(R.string.you_win)
                 match_result_text.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
@@ -41,7 +41,7 @@ class EndMatchDialog() : AppCompatDialogFragment() {
                 )
             }
             2 -> {
-                match_result_text.text = "You Lose"
+                match_result_text.text =  getString(R.string.you_lose)
                 match_result_text.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
@@ -50,7 +50,7 @@ class EndMatchDialog() : AppCompatDialogFragment() {
                 )
             }
             3 -> {
-                match_result_text.text = "Draw"
+                match_result_text.text =  getString(R.string.draw)
                 match_result_text.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
@@ -64,8 +64,8 @@ class EndMatchDialog() : AppCompatDialogFragment() {
 
 
         builder.setView(mycustomview)
-        builder.setTitle("Match is over")
-        builder.setPositiveButton("Quit") { _, _ ->
+        builder.setTitle(getString(R.string.match_is_over))
+        builder.setPositiveButton(getString(R.string.quit)) { _, _ ->
             mListener?.goToLobbyClick()
             Lock = false
         }
