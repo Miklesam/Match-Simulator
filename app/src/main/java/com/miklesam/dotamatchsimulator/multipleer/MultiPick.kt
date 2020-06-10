@@ -310,7 +310,7 @@ class MultiPick() : Fragment(R.layout.fragment_multipick) {
             Heros_icon[i]!!.setOnClickListener {
                 if (yourTurn && !lock) {
                     if (heroesArray.contains(i)) {
-                        showCustomToast("Уже пикнут", Toast.LENGTH_SHORT)
+                        showCustomToast(getString(R.string.already_picked), Toast.LENGTH_SHORT)
                     } else {
                         if (host) {
                             (myViewModel as HostViewModel).setPoint(i, true)

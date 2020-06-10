@@ -30,6 +30,7 @@
     <string name="your_turn">Your turn</string>
     <string name="enemy_turn">Enemy\'s turn</string>
     <string name="game_start_after">Game start after %d</string>
+    <string name="already_picked">Already picked</string>
     <string-array name="lineList">
         <item>Top</item>
         <item>Mid</item>
