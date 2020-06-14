@@ -74,15 +74,15 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
         //callIntent=false
         multiVM.setProgress(2)
         finishAffinity()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         if (progressState != 2 && callIntent) {
             finishAffinity()
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
     }
@@ -92,7 +92,5 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
             super.onBackPressed()
             callIntent = false
         }
-
-
     }
 }

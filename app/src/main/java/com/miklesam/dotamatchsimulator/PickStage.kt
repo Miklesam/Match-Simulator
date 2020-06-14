@@ -490,8 +490,25 @@ class PickStage : Fragment(R.layout.pick_stage) {
         } else if(pick_state<22) {
             soundPull?.play(soundOne, 1F, 1F, 0, 0, 1F)
         }
+        if(timer!=null){
+            timer!!.start()
+        }else{
+            timer=object : CountDownTimer(60000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    timeleft.text = ("" + millisUntilFinished / 1000)
+                }
 
-        timer!!.start()
+                override fun onFinish() {
+                    if (pick_state != 22) {
+                        block = true
+                        randomPlayerPick()
+                    }
+                }
+            }
+            timer?.start()
+
+        }
+
         block = false
         if (pick_state == 22) {
             timer?.cancel()
