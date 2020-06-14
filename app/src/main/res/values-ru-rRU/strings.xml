@@ -9,7 +9,7 @@
     <string name="hero">Герой</string>
     <string name="late_game">Поздняя игра</string>
     <string name="fighting">Сражение</string>
-    <string name="lainning">Лэйнинг</string>
+    <string name="lainning">Начало игры</string>
     <string name="host">Хост</string>
     <string name="connect_to_host">Подключиться к хосту</string>
     <string name="start_host">Запустить хост</string>
@@ -29,4 +29,8 @@
     <string name="enemy_turn">Ход противника</string>
     <string name="game_start_after">Игра начнется через %d</string>
     <string name="already_picked">Уже пикнут</string>
+    <string name="privacy_policy">Политика Конфиденциальности</string>
+    <string name="part_1">Игра начинается с пиков и банов героев. Каждый герой имеет три характеристики:\n- Начало игры\n- Сражение\n- Поздняя игра\n
+        Характеристики героев можно посмотреть во вкладке статистика героев.</string>
+
 </resources>
