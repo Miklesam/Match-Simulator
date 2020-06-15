@@ -10,6 +10,7 @@ import com.miklesam.dotamatchsimulator.multipleer.MultiGame
 import com.miklesam.dotamatchsimulator.multipleer.MultiPick
 import com.miklesam.dotamatchsimulator.multipleer.client.FragmentClient
 import com.miklesam.dotamatchsimulator.multipleer.host.FragmentHost
+import com.miklesam.dotamatchsimulator.simplefragments.FragmentHowToConnect
 import com.miklesam.dotamatchsimulator.utils.replaceFragmentFromRightToLeft
 
 
@@ -40,6 +41,13 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
     private fun showFragmentMultipleer() {
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = FragmentMultipleer()
+        transaction.replace(R.id.fragment_holder, fragment)
+        transaction.commit()
+    }
+
+    override fun howToConnectClicked() {
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment = FragmentHowToConnect()
         transaction.replace(R.id.fragment_holder, fragment)
         transaction.commit()
     }

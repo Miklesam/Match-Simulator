@@ -34,6 +34,12 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="part_1">The game begins with a picks and bans of heroes. Each hero has three characteristics:\n- Early Game\n- Fighting\n- Late Game\n
     Characteristics of heroes can be found in the hero statistics tab.</string>
+    <string name="how_to_connect">How to connect</string>
+    <string name="connect_1">To connect to the multiplayer, both players must be connected to the local wifi network (in other words, to one wifi router).
+    One player must become the host, and the other connect to it.</string>
+    <string name="connect_2">To become a host you need to click start host and tell your IP address to another player.</string>
+    <string name="connect_3">To connect to a host, enter the host IP address and click connect to host.</string>
+    <string name="connect_4">After that, enjoy the game.</string>
 
     <string-array name="lineList">
         <item>Top</item>
