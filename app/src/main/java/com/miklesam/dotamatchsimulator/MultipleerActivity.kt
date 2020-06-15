@@ -46,10 +46,7 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
     }
 
     override fun howToConnectClicked() {
-        val transaction = supportFragmentManager.beginTransaction()
-        val fragment = FragmentHowToConnect()
-        transaction.replace(R.id.fragment_holder, fragment)
-        transaction.commit()
+        replaceFragmentFromRightToLeft(FragmentHowToConnect(), true)
     }
 
     override fun hostClicked() {
@@ -82,7 +79,10 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
         //callIntent=false
         multiVM.setProgress(2)
         finishAffinity()
-        val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        val intent = Intent(
+            this,
+            MainActivity::class.java
+        ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 
@@ -90,7 +90,10 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
         super.onStop()
         if (progressState != 2 && callIntent) {
             finishAffinity()
-            val intent = Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            val intent = Intent(
+                this,
+                MainActivity::class.java
+            ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
     }
