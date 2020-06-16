@@ -1,11 +1,18 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+
     android:background="@color/card_back">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -36,17 +43,74 @@
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/how_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/vertival_half"/>
+        app:layout_constraintEnd_toEndOf="@id/vertival_half"
+        app:layout_constraintBottom_toBottomOf="@+id/image_play_1"/>
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:id="@+id/image_play_1"
         app:layout_constraintTop_toBottomOf="@+id/how_header"
         app:layout_constraintStart_toStartOf="@id/vertival_half"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/heros_stats_ima"/>
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:id="@+id/image_play_2"
+            app:layout_constraintTop_toBottomOf="@+id/image_play_1"
+            app:layout_constraintStart_toStartOf="@id/vertival_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/heros_stats_ima"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_2"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/image_play_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertival_half"
+            app:layout_constraintBottom_toBottomOf="@+id/image_play_2"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:id="@+id/image_play_3"
+            app:layout_constraintTop_toBottomOf="@+id/image_play_2"
+            app:layout_constraintStart_toStartOf="@id/vertival_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/heros_stats_ima"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_3"
+            android:text="@string/part_3"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/image_play_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertival_half"
+            app:layout_constraintBottom_toBottomOf="@+id/image_play_3"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_4"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/text_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

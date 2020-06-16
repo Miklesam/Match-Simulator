@@ -51,10 +51,12 @@ class LaneCalculator {
             if (sumPointsRad > sumPointsDire) {
                 //radiant makes kill
                 val differ = sumPointsRad - sumPointsDire
-                if (differ < 10) {
+                val firstPoint = calculateFirstPoint(radiant)
+                val secondPoint = calculateSecondPoint(radiant)
+                if (differ < firstPoint) {
                     generateRadiantKill(radiant, dire)
                     generateDiretKill(radiant, dire)
-                } else if (differ < 20) {
+                } else if (differ < secondPoint) {
                     generateRadiantKill(radiant, dire)
                     if (radiant.size == 1 && dire.size == 1) returningVal = 2
                 } else {
@@ -64,10 +66,12 @@ class LaneCalculator {
             } else if (sumPointsDire > sumPointsRad) {
                 //dire makes kill
                 val differ = sumPointsDire - sumPointsRad
-                if (differ < 10) {
+                val firstPoint = calculateFirstPoint(dire)
+                val secondPoint = calculateSecondPoint(dire)
+                if (differ < firstPoint) {
                     generateRadiantKill(radiant, dire)
                     generateDiretKill(radiant, dire)
-                } else if (differ < 20) {
+                } else if (differ < secondPoint) {
                     generateDiretKill(radiant, dire)
                     if (radiant.size == 1 && dire.size == 1) returningVal = 1
                 } else {
@@ -115,6 +119,25 @@ class LaneCalculator {
             }
         }
         radiant[(0 until radiant.size).random()].death++
+    }
+
+
+    private fun calculateFirstPoint(heroesOnLine: ArrayList<HeroStats>): Int {
+        var firstPoint = 0
+        firstPoint = 10 + (heroesOnLine.size - 1) * 15
+        if (heroesOnLine.size == 5) {
+            firstPoint += 20
+        }
+        return firstPoint
+    }
+
+    private fun calculateSecondPoint(heroesOnLine: ArrayList<HeroStats>): Int {
+        var secondPoint = 0
+        secondPoint = 20 + (heroesOnLine.size - 1) * 30
+        if (heroesOnLine.size == 5) {
+            secondPoint += 50
+        }
+        return secondPoint
     }
 
 

@@ -34,6 +34,12 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="part_1">The game begins with a picks and bans of heroes. Each hero has three characteristics:\n- Early Game\n- Fighting\n- Late Game\n
     Characteristics of heroes can be found in the hero statistics tab.</string>
+    <string name="part_2">After the picks, the match starts. You can place your heroes in three lines:\n- Top\n- Mid\n- Bottom\n</string>
+    <string name="part_3">On each line, the battle is calculated:\nIn the time interval from 0 to 18 minutes, the characteristic Early game is taken into account.
+    \nIn the time interval from 18 to 36 minutes, the characteristic Fighting game is taken into account.
+    \nIn the time interval from 36 minutes to the end of the game, the Late Game characteristic is taken into account.</string>
+    <string name="part_4">The characterization of heroes taken into account in one line is added up and compared with the sum of the opponent’s characteristics.
+        On whose side the sum is greater, he wins the line.</string>
     <string name="how_to_connect">How to connect</string>
     <string name="connect_1">To connect to the multiplayer, both players must be connected to the local wifi network (in other words, to one wifi router).
     One player must become the host, and the other connect to it.</string>
