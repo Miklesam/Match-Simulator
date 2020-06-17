@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/image_play_1"
             app:layout_constraintStart_toStartOf="@id/vertival_half"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/heros_stats_ima"/>
+            android:src="@drawable/assign_heroes_images"/>
 
         <TextView
             android:layout_width="0dp"
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/image_play_2"
             app:layout_constraintStart_toStartOf="@id/vertival_half"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/heros_stats_ima"/>
+            android:src="@drawable/calculate_on_lines"/>
 
         <TextView
             android:layout_width="0dp"
@@ -99,10 +99,89 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:id="@+id/text_4"
             android:text="@string/part_4"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/text_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/part_5"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:id="@+id/text_5"
+            app:layout_constraintTop_toBottomOf="@+id/text_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_6"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/text_6"
+            app:layout_constraintTop_toBottomOf="@+id/text_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_7"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/text_7"
+            app:layout_constraintTop_toBottomOf="@+id/text_6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_8"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/text_8"
+            app:layout_constraintTop_toBottomOf="@+id/text_7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/part_9"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:id="@+id/text_9"
+            app:layout_constraintTop_toBottomOf="@+id/text_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_10"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/text_10"
+            app:layout_constraintTop_toBottomOf="@+id/text_9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/part_11"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:id="@+id/text_11"
+            app:layout_constraintTop_toBottomOf="@+id/text_10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

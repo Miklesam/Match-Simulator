@@ -2,11 +2,15 @@ package com.miklesam.dotamanager.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.widget.*
+import android.view.KeyEvent
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatDialogFragment
-import com.miklesam.dotamatchsimulator.datamodels.Heroes
 import com.miklesam.dotamatchsimulator.R
+import com.miklesam.dotamatchsimulator.datamodels.Heroes
 
 class LineningDialog() : AppCompatDialogFragment() {
     constructor(myListener: NoticeDialogListener, heroes: ArrayList<Int>?) : this() {
@@ -107,7 +111,10 @@ class LineningDialog() : AppCompatDialogFragment() {
 
         val dialog= builder.create()
         dialog.setCanceledOnTouchOutside(false)
-
+        dialog.setCancelable(false)
+        dialog.setOnKeyListener { _, keyCode, _ -> // Prevent dialog close on back press button
+            keyCode == KeyEvent.KEYCODE_BACK
+        }
         return dialog
     }
 

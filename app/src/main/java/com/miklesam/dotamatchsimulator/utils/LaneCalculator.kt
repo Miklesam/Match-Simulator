@@ -53,10 +53,10 @@ class LaneCalculator {
                 val differ = sumPointsRad - sumPointsDire
                 val firstPoint = calculateFirstPoint(radiant)
                 val secondPoint = calculateSecondPoint(radiant)
-                if (differ < firstPoint) {
+                if (differ <= firstPoint) {
                     generateRadiantKill(radiant, dire)
                     generateDiretKill(radiant, dire)
-                } else if (differ < secondPoint) {
+                } else if (differ <= secondPoint) {
                     generateRadiantKill(radiant, dire)
                     if (radiant.size == 1 && dire.size == 1) returningVal = 2
                 } else {
@@ -68,10 +68,10 @@ class LaneCalculator {
                 val differ = sumPointsDire - sumPointsRad
                 val firstPoint = calculateFirstPoint(dire)
                 val secondPoint = calculateSecondPoint(dire)
-                if (differ < firstPoint) {
+                if (differ <= firstPoint) {
                     generateRadiantKill(radiant, dire)
                     generateDiretKill(radiant, dire)
-                } else if (differ < secondPoint) {
+                } else if (differ <= secondPoint) {
                     generateDiretKill(radiant, dire)
                     if (radiant.size == 1 && dire.size == 1) returningVal = 1
                 } else {
@@ -133,7 +133,7 @@ class LaneCalculator {
 
     private fun calculateSecondPoint(heroesOnLine: ArrayList<HeroStats>): Int {
         var secondPoint = 0
-        secondPoint = 20 + (heroesOnLine.size - 1) * 30
+        secondPoint = 15 + (heroesOnLine.size - 1) * 20
         if (heroesOnLine.size == 5) {
             secondPoint += 50
         }

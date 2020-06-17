@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
@@ -72,6 +73,10 @@ class EndMatchDialog() : AppCompatDialogFragment() {
 
         val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
+        dialog.setOnKeyListener { _, keyCode, _ -> // Prevent dialog close on back press button
+            keyCode == KeyEvent.KEYCODE_BACK
+        }
         return dialog
     }
 

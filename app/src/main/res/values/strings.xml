@@ -40,6 +40,19 @@
     \nIn the time interval from 36 minutes to the end of the game, the Late Game characteristic is taken into account.</string>
     <string name="part_4">The characterization of heroes taken into account in one line is added up and compared with the sum of the opponent’s characteristics.
         On whose side the sum is greater, he wins the line.</string>
+    <string name="part_5">How is the battle calculated?</string>
+    <string name="part_6">Let parameter N - be the number of heroes on the line of the team which has a larger sum of characteristics.</string>
+    <string name="part_7">Then if the difference between the sums of the characteristics is less than or equal\n   10+ (N-1) * 15, \nboth sides do the kill.</string>
+    <string name="part_8">Otherwise, if the difference is less than or equal\n   15+ (N-1) * 20, \nonly the side with the largest amount of characteristics makes the kill.\n
+        If the difference is greater, then the building is also destroyed.\n
+    To stop the team push on one side, +20 and +50 are added to the formulas, respectively, if you send all your heroes to the same line. Therefore, it is not advisable.\n
+    If no hero comes to the line on one side, and at least one comes on the other, the building is destroyed.\n
+    The game continues until the Ancient is destroyed.</string>
+    <string name="part_9">Examples:</string>
+    <string name="part_10">1. If the line comes Alchemist vs Bristleback, then for the characteristics of the Early Game, the difference between them will be 15,
+        so the Bristleback will do the kills, but will not destroy the tower.</string>
+    <string name="part_11">2. If the line comes Beastmaster and Clockwerk vs Spectre and Dazzle, then for the characteristics of the Early Game, the difference between them will be 40,
+        so the Beastmaster and Clockwerk will do the kills, and will destroy the tower.</string>
     <string name="how_to_connect">How to connect</string>
     <string name="connect_1">To connect to the multiplayer, both players must be connected to the local wifi network (in other words, to one wifi router).
     One player must become the host, and the other connect to it.</string>

@@ -10,7 +10,7 @@ enum class Heroes(val id: Int, val heroName: String, val image_pick: Int, val ic
         R.drawable.abadon_large_ban,
         R.drawable.abadon_min_ban,
         R.drawable.abadon_mipmap,85,70,55),
-    ALCHEMIC(1, "Alchemic",
+    ALCHEMIC(1, "Alchemist",
         R.drawable.alcemic_picked,
         R.drawable.alchemic_icon,
         R.drawable.alcemic_large_ban,
