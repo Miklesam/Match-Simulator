@@ -13,6 +13,7 @@ class FragmentInfo :Fragment(R.layout.fragment_info){
         fun howToPlayClicked()
         fun statsClicked()
         fun privacyPolicyClicked()
+        fun achievmentsClicked()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -21,5 +22,6 @@ class FragmentInfo :Fragment(R.layout.fragment_info){
         how_to_play_bttn.setOnClickListener { infoListener.howToPlayClicked() }
         stats_bttn.setOnClickListener { infoListener.statsClicked() }
         privacy_policy.setOnClickListener { infoListener.privacyPolicyClicked() }
+        achivments.setOnClickListener { infoListener.achievmentsClicked() }
     }
 }

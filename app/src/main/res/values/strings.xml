@@ -32,6 +32,8 @@
     <string name="game_start_after">Game start after %d</string>
     <string name="already_picked">Already picked</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="achievements">Achievements</string>
+
     <string name="part_1">The game begins with a picks and bans of heroes. Each hero has three characteristics:\n- Early Game\n- Fighting\n- Late Game\n
     Characteristics of heroes can be found in the hero statistics tab.</string>
     <string name="part_2">After the picks, the match starts. You can place your heroes in three lines:\n- Top\n- Mid\n- Bottom\n</string>
@@ -77,4 +79,7 @@
         <item>Rosh</item>
     </string-array>
 
+    <string name="app_id" translatable="false">22466509993</string>
+    <string name="achieve_1" translatable="false">CggIqfnu2FMQAhAB</string>
+    <string name="achieve_2" translatable="false">CggIqfnu2FMQAhAC</string>
 </resources>

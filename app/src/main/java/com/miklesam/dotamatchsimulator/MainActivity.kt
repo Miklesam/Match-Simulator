@@ -3,9 +3,16 @@ package com.miklesam.dotamatchsimulator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.games.AchievementsClient
+import com.google.android.gms.games.Games
+import com.google.android.gms.games.LeaderboardsClient
 import com.miklesam.dotamatchsimulator.game.FragmentGame
 import com.miklesam.dotamatchsimulator.simplefragments.*
 
@@ -24,9 +31,40 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
         if (savedInstanceState == null) {
             showFragmentMain()
         }
+        initGoogleClientAndSignin()
         mainVM.getProgress().observe(this, Observer {
             progressState = it
         })
+    }
+
+
+    private var googleSignInClient: GoogleSignInClient? = null
+    private var achievementClient: AchievementsClient? = null
+    private var leaderboardsClient: LeaderboardsClient? = null
+
+    fun initGoogleClientAndSignin() {
+        googleSignInClient = GoogleSignIn.getClient(
+            this,
+            GoogleSignInOptions.Builder(
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN
+            ).build()
+        )
+
+        googleSignInClient?.silentSignIn()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.w("Activity", "succes Sign")
+                achievementClient = Games.getAchievementsClient(
+                    this,
+                    task.result!!
+                )
+                leaderboardsClient = Games.getLeaderboardsClient(
+                    this,
+                    task.result!!
+                )
+            } else {
+                Log.e("Error", "signInError", task.exception)
+            }
+        }
     }
 
 
@@ -39,6 +77,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     }
 
     override fun gameClicked() {
+        achievementClient?.unlock(getString(R.string.achieve_1))
         val transaction = supportFragmentManager.beginTransaction()
         //val fragment = FragmentGame()
         val fragment = PickStage()
@@ -90,6 +129,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     }
 
     override fun statsClicked() {
+        achievementClient?.unlock(getString(R.string.achieve_2))
         val transaction = supportFragmentManager.beginTransaction()
         val fragment =
             FragmentStats()
@@ -107,9 +147,20 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
         transaction.commit()
     }
 
+    override fun achievmentsClicked() {
+        showAchievements()
+    }
+
     override fun onBackPressed() {
         if (progressState == 0) {
             super.onBackPressed()
+        }
+    }
+
+    private fun showAchievements() {
+        achievementClient?.achievementsIntent?.addOnSuccessListener { intent ->
+            Log.w("Activity", "start Activity")
+            startActivityForResult(intent, 0)
         }
     }
 

@@ -30,6 +30,7 @@
     <string name="game_start_after">Игра начнется через %d</string>
     <string name="already_picked">Уже пикнут</string>
     <string name="privacy_policy">Политика Конфиденциальности</string>
+    <string name="achievements">Достижения</string>
     <string name="part_1">Игра начинается с пиков и банов героев. Каждый герой имеет три характеристики:\n- Начало игры\n- Сражение\n- Поздняя игра\n
         Характеристики героев можно посмотреть во вкладке статистика героев.</string>
     <string name="part_2">После пиков стартует матч. Вы можете расставить своих героев по трем линиям:\n- Top\n- Mid\n- Bottom\n</string>
