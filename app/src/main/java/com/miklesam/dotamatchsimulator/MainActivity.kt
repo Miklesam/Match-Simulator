@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     private var leaderboardsClient: LeaderboardsClient? = null
 
     fun initGoogleClientAndSignin() {
+        Log.w("Activity", "try to  init")
         googleSignInClient = GoogleSignIn.getClient(
             this,
             GoogleSignInOptions.Builder(
@@ -120,6 +121,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     }
 
     override fun howToPlayClicked() {
+        achievementClient?.unlock(getString(R.string.achieve_3))
         val transaction = supportFragmentManager.beginTransaction()
         val fragment =
             FragmentHowToPlay()
@@ -129,7 +131,7 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
     }
 
     override fun statsClicked() {
-        achievementClient?.unlock(getString(R.string.achieve_2))
+        achievementClient?.unlock(getString(R.string.achieve_4))
         val transaction = supportFragmentManager.beginTransaction()
         val fragment =
             FragmentStats()
@@ -149,6 +151,16 @@ class MainActivity : AppCompatActivity(), FragmentMenu.MenuListener, PickStage.n
 
     override fun achievmentsClicked() {
         showAchievements()
+    }
+
+    override fun aboutClicked() {
+        achievementClient?.unlock(getString(R.string.achieve_5))
+        val transaction = supportFragmentManager.beginTransaction()
+        val fragment =
+            FragmentAbout()
+        transaction.replace(R.id.fragment_holder, fragment)
+            .addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onBackPressed() {

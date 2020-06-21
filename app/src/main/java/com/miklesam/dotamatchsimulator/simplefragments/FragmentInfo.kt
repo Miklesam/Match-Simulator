@@ -14,6 +14,7 @@ class FragmentInfo :Fragment(R.layout.fragment_info){
         fun statsClicked()
         fun privacyPolicyClicked()
         fun achievmentsClicked()
+        fun aboutClicked()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,5 +24,6 @@ class FragmentInfo :Fragment(R.layout.fragment_info){
         stats_bttn.setOnClickListener { infoListener.statsClicked() }
         privacy_policy.setOnClickListener { infoListener.privacyPolicyClicked() }
         achivments.setOnClickListener { infoListener.achievmentsClicked() }
+        about.setOnClickListener { infoListener.aboutClicked() }
     }
 }

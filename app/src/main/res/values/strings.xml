@@ -33,6 +33,7 @@
     <string name="already_picked">Already picked</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="achievements">Achievements</string>
+    <string name="about">About the project</string>
 
     <string name="part_1">The game begins with a picks and bans of heroes. Each hero has three characteristics:\n- Early Game\n- Fighting\n- Late Game\n
     Characteristics of heroes can be found in the hero statistics tab.</string>
@@ -69,7 +70,7 @@
     </string-array>
 
     <string-array name="modernlineList">
-        <item>Top</item>
+        <item>Top</item>M
         <item>Mid</item>
         <item>Bot</item>
         <item>Forest</item>
@@ -79,7 +80,14 @@
         <item>Rosh</item>
     </string-array>
 
-    <string name="app_id" translatable="false">22466509993</string>
-    <string name="achieve_1" translatable="false">CggIqfnu2FMQAhAB</string>
-    <string name="achieve_2" translatable="false">CggIqfnu2FMQAhAC</string>
+    <string name="app_id" translatable="false">937942289539</string>
+    <string name="achieve_1" translatable="false">CgkIg5nejaYbEAIQAQ</string>
+    <string name="achieve_2" translatable="false">CgkIg5nejaYbEAIQAg</string>
+    <string name="achieve_3" translatable="false">CgkIg5nejaYbEAIQAw</string>
+    <string name="achieve_4" translatable="false">CgkIg5nejaYbEAIQBA</string>
+    <string name="achieve_5" translatable="false">CgkIg5nejaYbEAIQBQ</string>
+
+    <string name="about_text">The game was created as a simulation of a Dota 2 game match for playing on a local network. All suggestions and suggestions regarding the game and statistics can be sent to mikle.samarkin@gmail.com.
+    \n\n\nCreation - Miklesam,
+    \nStatistics - Nanosok.</string>
 </resources>

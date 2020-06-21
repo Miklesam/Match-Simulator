@@ -3,9 +3,16 @@ package com.miklesam.dotamatchsimulator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.games.AchievementsClient
+import com.google.android.gms.games.Games
+import com.google.android.gms.games.LeaderboardsClient
 import com.miklesam.dotamatchsimulator.multipleer.MultiGame
 import com.miklesam.dotamatchsimulator.multipleer.MultiPick
 import com.miklesam.dotamatchsimulator.multipleer.client.FragmentClient
@@ -20,6 +27,9 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
     var callIntent = true
     private lateinit var multiVM: MultiActivityVM
     var progressState = 0
+    private var googleSignInClient: GoogleSignInClient? = null
+    private var achievementClient: AchievementsClient? = null
+    private var leaderboardsClient: LeaderboardsClient? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multipleer)
@@ -31,6 +41,7 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
         if (savedInstanceState == null) {
             showFragmentMultipleer()
         }
+        initGoogleClientAndSignin()
 
         multiVM.getProgress().observe(this, Observer {
             progressState = it
@@ -58,11 +69,13 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
     }
 
     override fun hostOk() {
+        achievementClient?.unlock(getString(R.string.achieve_2))
         multiVM.setProgress(1)
         replaceFragmentFromRightToLeft(MultiPick(true), true)
     }
 
     override fun clientOk() {
+        achievementClient?.unlock(getString(R.string.achieve_2))
         multiVM.setProgress(1)
         replaceFragmentFromRightToLeft(MultiPick(false), true)
     }
@@ -102,6 +115,32 @@ class MultipleerActivity : AppCompatActivity(), FragmentMultipleer.MultioleerLis
         if (progressState == 0) {
             super.onBackPressed()
             callIntent = false
+        }
+    }
+
+    fun initGoogleClientAndSignin() {
+        Log.w("Activity", "try to  init")
+        googleSignInClient = GoogleSignIn.getClient(
+            this,
+            GoogleSignInOptions.Builder(
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN
+            ).build()
+        )
+
+        googleSignInClient?.silentSignIn()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.w("Activity", "succes Sign")
+                achievementClient = Games.getAchievementsClient(
+                    this,
+                    task.result!!
+                )
+                leaderboardsClient = Games.getLeaderboardsClient(
+                    this,
+                    task.result!!
+                )
+            } else {
+                Log.e("Error", "signInError", task.exception)
+            }
         }
     }
 }
